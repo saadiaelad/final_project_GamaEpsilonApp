@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Gama Epsilon App</string>
+    <string name="accept_butt">אישור</string>
+    <string name="password_text">הכנס סיסמא</string>
+    <string name="username_text">הכנס שם משתמש</string>
+    <string name="open_paka_butt">פקעות פתוחות</string>
+    <string name="search_butt">חיפוש</string>
+    <string name="managment_butt">ניהול</string>
+    <string name="name_text">שלום זאן קלוד</string>
+</resources>
