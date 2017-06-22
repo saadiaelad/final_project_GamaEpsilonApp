@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "937816720224",
+    "firebase_url": "https://gamaepsilonapp.firebaseio.com",
+    "project_id": "gamaepsilonapp",
+    "storage_bucket": "gamaepsilonapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:937816720224:android:85ceaefbd6a5c123",
+        "android_client_info": {
+          "package_name": "com.example.elad.gamaepsilonapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "937816720224-9ugq95rj55014bgs6fld3ti5k6jcmdr9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.elad.gamaepsilonapp",
+            "certificate_hash": "5d19eff73eddf3523ea30e6b453ed3d39ca7f65d"
+          }
+        },
+        {
+          "client_id": "937816720224-905q8dsuienpdt6tilhn74lu554mc9mu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUtFlQDtj2tiSoTjKeM90yW2hMo-l9_TU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "937816720224-905q8dsuienpdt6tilhn74lu554mc9mu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
