@@ -7,4 +7,89 @@
     <string name="search_butt">חיפוש</string>
     <string name="managment_butt">ניהול</string>
     <string name="name_text">שלום זאן קלוד</string>
+    <string name="sign_out_butt">התנתקות</string>
+    <string name="sign_out_butt2">התנתקות</string>
+    <string name="back_butt">חזרה</string>
+    <string name="sign_out_butt3">התנתקות</string>
+    <string name="back_butt2">חזרה</string>
+    <string name="sign_out_butt4">התנתקות</string>
+    <string name="close_paka_butt">סגירה</string>
+    <string name="tat_check_box">TAT</string>
+    <string name="excel_send_check_box">יצוא עצמי</string>
+    <string name="accept_butt2">אישור</string>
+    <string name="details_butt">פרטים</string>
+    <string name="paka_open_date">תאריך פתיחה</string>
+    <string name="string_paka_open_date">תאריך פתיחה </string>
+    <string name="paka_periorty">דחיפות</string>
+    <string name="paka_add_text">הוספת פקע</string>
+    <string name="paka_commit">הערות</string>
+    <string name="paka_address">כתובת</string>
+    <string name="paka_num">מספר פקע</string>
+    <string name="paka_tat">סמן אם הפקע מתאת</string>
+    <string name="open_or_close">סמן אם סגור</string>
+    <string name="paka_profit">רווח בשקלים</string>
+    <string name="paka_class_name">שם המחלקה</string>
+    <string name="paka_starting_date">תאריך התחלת ביצוע</string>
+    <string name="paka_closing_date">תאריך סגירה</string>
+    <string name="accept_butt5">אישור</string>
+    <string name="paka_works">רשימת עבודות</string>
+    <string name="paka_workers_list">רשימת עובדים</string>
+    <string name="periorty">דחיפות</string>
+    <string name="paka_commit2">הערות</string>
+    <string name="paka_address2">כתובת</string>
+    <string name="paka_number">מספר פקע</string>
+    <string name="profit_sum">רווח בשקלים</string>
+    <string name="class_name">שם המחלקה</string>
+    <string name="start_date">תאריך התחלת ביצוע</string>
+    <string name="close_date">תאריך סגירה</string>
+    <string name="open_date">תאריך פתיחה</string>
+    <string name="paka_search">חיפוש</string>
+    <string name="managment_text">ניהול</string>
+    <string name="add_remove_supervisor">הוספה או הסרה של מפקח</string>
+    <string name="add_remove_user">הוספה או הסרה של משתמש</string>
+    <string name="back_button">חזרה</string>
+    <string name="sign_out_button">התנתקות</string>
+    <string name="add_remove_user_text">הוספה והסרה של משתמש</string>
+    <string name="user_id">קוד הזדהות מFirebase</string>
+    <string name="first_name_text">שם פרטי</string>
+    <string name="phone_number_text">טלפון</string>
+    <string name="email_text">אימייל</string>
+    <string name="constractor_text">קבלן</string>
+    <string name="add_user_button">הוספת משתמש</string>
+    <string name="worker_list_text">רשימת משתמשים</string>
+    <string name="user_password">סיסמא</string>
+    <string name="add_remove_supervisor_text">הוספה או הסרה של מפקח</string>
+    <string name="supervisor_name">שם מלא</string>
+    <string name="work_place">מקום עבודה</string>
+    <string name="supervisor_list_text">רשימת מפקחים</string>
+    <string name="add_supervisor_button">הוספה</string>
+
+    <string name="firebase_location" translatable="false">https://gamaepsilonapp.firebaseio.com/</string>
+    <string name="action_settings">settings</string>
+
+    <string-array name="permissionOptions">
+        <item>בחר סוג עובד</item>
+        <item>עובד</item>
+        <item>מנהל צוות</item>
+        <item>מנהל ראשי</item>
+    </string-array>
+
+    <string-array name="className">
+        <item>בחר סעיף תקציבי</item>
+        <item>פיתוח</item>
+        <item>תחזוקה</item>
+        <item>העתקות</item>
+        <item>תחזוקה HP</item>
+        <item>פיתוח HP</item>
+        <item>סיגמנטציה</item>
+    </string-array>
+
+    <string-array name="searchOption">
+        <item>בחר סוג חיפוש</item>
+        <item>מספר פקע</item>
+        <item>מפקח + תאריך</item>
+        <item>תאט + תאריך</item>
+        <item>עובד + חודש</item>
+    </string-array>
+
 </resources>

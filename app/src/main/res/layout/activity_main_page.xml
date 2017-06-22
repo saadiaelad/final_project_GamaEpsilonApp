@@ -10,53 +10,73 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.elad.gamaepsilonapp.MainPage"
-    android:background="@android:color/holo_blue_light">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="25dp"
-        android:layout_marginTop="78dp"
-        android:id="@+id/nameText"
-        android:text="@string/name_text"
-        android:gravity="right"
-        android:textDirection="rtl"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"
-        tools:ignore="RtlHardcoded" />
-
-    <Button
-        android:text="@string/open_paka_butt"
-        android:layout_height="wrap_content"
-        android:id="@+id/openPakaButton"
-        android:layout_below="@+id/nameText"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:layout_width="140dp"
-        android:backgroundTint="@android:color/holo_red_light"
-        tools:targetApi="lollipop" />
-
-    <Button
-        android:text="@string/search_butt"
-        android:layout_width="140dp"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_alignEnd="@+id/openPakaButton"
-        android:id="@+id/searchButton"
-        android:backgroundTint="@android:color/holo_red_light"
-        tools:targetApi="lollipop" />
+    android:background="@android:color/white">
 
     <Button
         android:text="@string/managment_butt"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/searchButton"
-        android:layout_alignStart="@+id/searchButton"
-        android:layout_marginTop="47dp"
         android:id="@+id/managmentButton"
         android:backgroundTint="@android:color/holo_red_light"
-        tools:targetApi="lollipop" />
+        tools:targetApi="lollipop"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/searchButton"
+        android:layout_marginBottom="65dp"
+        android:textStyle="bold" />
+
+    <Button
+        android:text="@string/search_butt"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/searchButton"
+        android:backgroundTint="@android:color/holo_red_light"
+        tools:targetApi="lollipop"
+        android:layout_alignBottom="@+id/managmentButton"
+        android:layout_alignStart="@+id/openPakaButton"
+        android:layout_marginBottom="84dp"
+        android:textStyle="bold" />
+
+    <Button
+        android:text="@string/open_paka_butt"
+        android:layout_height="wrap_content"
+        android:id="@+id/openPakaButton"
+        android:layout_width="140dp"
+        android:backgroundTint="@android:color/holo_red_light"
+        tools:targetApi="lollipop"
+        android:layout_above="@+id/searchButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="36dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/nameText"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginRight="430dp"
+        android:layout_marginTop="220dp"
+        android:textColor="@android:color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        tools:ignore="RtlHardcoded" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        app:srcCompat="@drawable/logo"
+        android:id="@+id/logo"
+        android:layout_height="150sp"
+        tools:ignore="ContentDescription"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="@string/sign_out_butt4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/signOutButton"
+        android:backgroundTint="@android:color/holo_red_light"
+        tools:ignore="UnusedAttribute"
+        android:textStyle="bold" />
 
 </RelativeLayout>

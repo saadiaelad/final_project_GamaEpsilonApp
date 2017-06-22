@@ -1,9 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.elad.gamaepsilonapp.ManagmentPage">
+    android:background="@android:color/white"
+    android:backgroundTint="@android:color/white"
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    tools:context="com.example.elad.gamaepsilonapp.ManagmentPage"
+    tools:targetApi="lollipop">
 
-</android.support.constraint.ConstraintLayout>
+    <ImageView
+        android:id="@+id/logoImage"
+        android:layout_width="1136dp"
+        android:layout_height="150dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/logo"
+        tools:ignore="ContentDescription,MissingConstraints"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <TextView
+        android:id="@+id/appManagmentText"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="@string/managment_text"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/logoImage"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="39dp" />
+
+    <TextView
+        android:id="@+id/nameText"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginRight="430dp"
+        android:layout_marginTop="220dp"
+        android:textColor="@android:color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        tools:ignore="RtlHardcoded" />
+
+    <Button
+        android:id="@+id/addRemoveUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_remove_user"
+        android:backgroundTint="@android:color/holo_red_light"
+        tools:ignore="UnusedAttribute"
+        android:textStyle="bold"
+        android:layout_below="@+id/nameText"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/addRemoveSupervisor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_remove_supervisor"
+        android:backgroundTint="@android:color/holo_red_light"
+        tools:ignore="UnusedAttribute"
+        android:textStyle="bold"
+        android:layout_below="@+id/addRemoveUser"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp" />
+
+    <Button
+        android:id="@+id/signOutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/logoImage"
+        android:layout_alignParentBottom="true"
+        android:text="@string/sign_out_button"
+        android:backgroundTint="@android:color/holo_red_light"
+        tools:ignore="UnusedAttribute"
+        android:textStyle="bold"/>
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="36dp"
+        android:layout_toStartOf="@+id/signOutButton"
+        android:text="@string/back_button"
+        android:backgroundTint="@android:color/holo_red_light"
+        tools:ignore="UnusedAttribute"
+        android:textStyle="bold"/>
+
+</RelativeLayout>

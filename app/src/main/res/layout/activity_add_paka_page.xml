@@ -1,9 +1,288 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.elad.gamaepsilonapp.AddPakaPage">
+    android:background="@android:color/white"
+    android:backgroundTint="@android:color/white"
+    android:backgroundTintMode="src_over"
+    android:isScrollContainer="true"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.elad.gamaepsilonapp.AddPakaPage"
+    tools:targetApi="lollipop">
 
-</android.support.constraint.ConstraintLayout>
+    <ImageView
+        android:id="@+id/logoImage"
+        android:layout_width="1136dp"
+        android:layout_height="150dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/logo"
+        tools:ignore="ContentDescription,MissingConstraints" />
+
+
+    <TextView
+        android:id="@+id/addPakaText"
+        android:layout_width="950dp"
+        android:layout_height="40dp"
+        android:gravity="center_horizontal"
+        android:text="@string/paka_add_text"
+        android:textColor="@android:color/black"
+        android:textDirection="firstStrongRtl"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_alignBottom="@+id/logoImage" />
+
+
+    <EditText
+        android:id="@+id/pakaNumber"
+        android:layout_width="129dp"
+        android:layout_height="44dp"
+        android:layout_below="@+id/logoImage"
+        android:layout_marginTop="17dp"
+        android:layout_toEndOf="@+id/addressText"
+        android:background="@drawable/edittext_drawable"
+        android:ems="10"
+        android:gravity="right"
+        android:hint="@string/paka_number"
+        android:inputType="textPersonName"
+        android:textDirection="firstStrongRtl"
+        tools:ignore="LabelFor,RtlHardcoded,TextFields" />
+
+    <EditText
+        android:id="@+id/addressText"
+        android:layout_width="260dp"
+        android:layout_height="44dp"
+        android:layout_alignBaseline="@+id/pakaNumber"
+        android:layout_alignBottom="@+id/pakaNumber"
+        android:layout_toEndOf="@+id/classText"
+        android:background="@drawable/edittext_drawable"
+        android:ems="10"
+        android:gravity="right"
+        android:hint="@string/paka_address2"
+        android:inputType="textPersonName"
+        android:textDirection="firstStrongRtl"
+        tools:ignore="LabelFor,RtlHardcoded" />
+
+    <Spinner
+        android:id="@+id/classText"
+        android:layout_width="150dp"
+        android:layout_height="44dp"
+        android:background="@drawable/edittext_drawable"
+        android:ems="10"
+        android:gravity="right"
+        android:hint="@string/class_name"
+        android:inputType="textPersonName"
+        android:textDirection="firstStrongRtl"
+        tools:ignore="LabelFor,MissingConstraints,RtlHardcoded"
+        tools:layout_editor_absoluteX="584dp"
+        tools:layout_editor_absoluteY="204dp"
+        android:layout_alignTop="@+id/addressText"
+        android:layout_toEndOf="@+id/periorty" />
+
+    <CheckBox
+        android:id="@+id/openOrClose"
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:layout_alignTop="@+id/teamLeader"
+        android:layout_toStartOf="@+id/teamLeader"
+        android:background="@drawable/edittext_drawable"
+        android:gravity="right"
+        android:text="@string/open_or_close"
+        android:textDirection="firstStrongRtl"
+        tools:ignore="RtlHardcoded" />
+
+    <CheckBox
+        android:id="@+id/tatOrNot"
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:layout_alignTop="@+id/openDate"
+        android:layout_toEndOf="@+id/supervisor"
+        android:background="@drawable/edittext_drawable"
+        android:gravity="right"
+        android:text="@string/paka_tat"
+        android:textDirection="firstStrongRtl"
+        tools:ignore="MissingConstraints,RtlHardcoded" />
+
+    <Spinner
+        android:id="@+id/teamLeader"
+        android:layout_width="140dp"
+        android:layout_height="44dp"
+        android:layout_alignEnd="@+id/pakaNumber"
+        android:layout_alignTop="@+id/makingDate"
+        android:background="@drawable/edittext_drawable" />
+
+    <Spinner
+        android:id="@+id/supervisor"
+        android:layout_width="140dp"
+        android:layout_height="44dp"
+        android:layout_alignStart="@+id/logoImage"
+        android:layout_alignTop="@+id/tatOrNot"
+        android:background="@drawable/edittext_drawable"/>
+
+    <EditText
+        android:id="@+id/periorty"
+        android:layout_width="90dp"
+        android:layout_height="44dp"
+        android:layout_alignBaseline="@+id/classText"
+        android:layout_alignBottom="@+id/classText"
+        android:layout_toEndOf="@+id/openDate"
+        android:background="@drawable/edittext_drawable"
+        android:ems="10"
+        android:gravity="right"
+        android:hint="@string/periorty"
+        android:inputType="number"
+        android:textDirection="firstStrongRtl"
+        tools:ignore="LabelFor,RtlHardcoded" />
+
+    <EditText
+        android:id="@+id/openDate"
+        android:layout_width="170dp"
+        android:layout_height="44dp"
+        android:layout_alignBaseline="@+id/periorty"
+        android:layout_alignBottom="@+id/periorty"
+        android:layout_toEndOf="@+id/tatOrNot"
+        android:background="@drawable/edittext_drawable"
+        android:ems="10"
+        android:gravity="right"
+        android:hint="@string/open_date"
+        android:inputType="date"
+        android:textDirection="firstStrongRtl"
+        tools:ignore="LabelFor,RtlHardcoded" />
+
+    <EditText
+        android:id="@+id/makingDate"
+        android:layout_width="190dp"
+        android:layout_height="44dp"
+        android:layout_alignBaseline="@+id/closingDate"
+        android:layout_alignBottom="@+id/closingDate"
+        android:layout_toEndOf="@+id/closingDate"
+        android:background="@drawable/edittext_drawable"
+        android:ems="10"
+        android:gravity="right"
+        android:hint="@string/start_date"
+        android:inputType="date"
+        android:textDirection="firstStrongRtl"
+        tools:ignore="LabelFor,RtlHardcoded" />
+
+    <EditText
+        android:id="@+id/closingDate"
+        android:layout_width="160dp"
+        android:layout_height="44dp"
+        android:layout_alignBaseline="@+id/profitSum"
+        android:layout_alignBottom="@+id/profitSum"
+        android:layout_toEndOf="@+id/profitSum"
+        android:background="@drawable/edittext_drawable"
+        android:ems="10"
+        android:gravity="right"
+        android:hint="@string/close_date"
+        android:inputType="date"
+        android:textDirection="firstStrongRtl"
+        tools:ignore="LabelFor,RtlHardcoded" />
+
+    <EditText
+        android:id="@+id/profitSum"
+        android:layout_width="150dp"
+        android:layout_height="44dp"
+        android:layout_above="@+id/works"
+        android:layout_alignStart="@+id/works"
+        android:layout_marginBottom="18dp"
+        android:background="@drawable/edittext_drawable"
+        android:ems="10"
+        android:gravity="right"
+        android:hint="@string/profit_sum"
+        android:inputType="numberDecimal"
+        android:textDirection="firstStrongRtl"
+        tools:ignore="LabelFor,RtlHardcoded" />
+
+    <EditText
+        android:id="@+id/pakaCommit"
+        android:layout_width="323dp"
+        android:layout_height="317dp"
+        android:layout_above="@+id/addUserButton"
+        android:layout_alignStart="@+id/supervisor"
+        android:background="@drawable/edittext_drawable"
+        android:ems="10"
+        android:gravity="top|center"
+        android:hint="@string/paka_commit2"
+        android:inputType="textPersonName"
+        android:textDirection="firstStrongRtl" />
+
+    <Button
+        android:id="@+id/addUserButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/pakaCommit"
+        android:layout_marginBottom="15dp"
+        android:layout_marginStart="13dp"
+        android:backgroundTint="@android:color/holo_red_light"
+        android:paddingBottom="0dp"
+        android:text="@string/accept_butt5"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/workListText"
+        android:layout_width="355dp"
+        android:layout_height="43dp"
+        android:layout_below="@+id/works"
+        android:layout_marginStart="23dp"
+        android:layout_toEndOf="@+id/pakaCommit"
+        android:background="@drawable/edittext_drawable"
+        android:gravity="center"
+        android:text="@string/paka_works"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        tools:ignore="SpUsage" />
+
+    <Spinner
+        android:id="@+id/works"
+        android:layout_width="355dp"
+        android:layout_height="44dp"
+        android:layout_alignStart="@+id/workListText"
+        android:layout_alignTop="@+id/workers"
+        android:background="@drawable/edittext_drawable" />
+
+    <Spinner
+        android:id="@+id/workers"
+        android:layout_width="355dp"
+        android:layout_height="44dp"
+        android:layout_above="@+id/workersListText"
+        android:layout_alignStart="@+id/workersListText"
+        android:background="@drawable/edittext_drawable" />
+
+    <TextView
+        android:id="@+id/workersListText"
+        android:layout_width="355dp"
+        android:layout_height="43dp"
+        android:layout_above="@+id/workersListView"
+        android:layout_alignStart="@+id/workersListView"
+        android:layout_marginBottom="17dp"
+        android:background="@drawable/edittext_drawable"
+        android:gravity="center"
+        android:text="@string/paka_workers_list"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <ListView
+        android:id="@+id/worksListView"
+        android:layout_width="355dp"
+        android:layout_height="220dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/workListText"
+        android:background="@drawable/edittext_drawable" />
+
+    <ListView
+        android:id="@+id/workersListView"
+        android:layout_width="355dp"
+        android:layout_height="220dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="37dp"
+        android:layout_toEndOf="@+id/worksListView"
+        android:background="@drawable/edittext_drawable" />
+
+</RelativeLayout>
