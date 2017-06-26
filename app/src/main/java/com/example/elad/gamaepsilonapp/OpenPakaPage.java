@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -17,10 +16,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class OpenPakaPage extends AppCompatActivity implements ValueEventListener{
+
+    private String permission;
     private TextView nameText;
     private ImageButton addPakaButton;
     private ListView pakaList;
@@ -29,11 +29,12 @@ public class OpenPakaPage extends AppCompatActivity implements ValueEventListene
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private DatabaseReference dataRef = database.getReference("user_table");
+    private DatabaseReference dataRefUser = database.getReference("userTable");
     private onClickListener cl = new onClickListener();
     private String username;
-    private Query q;
     private User thisUser = new User();
+    private Paka paka = new Paka();
+    private String pakaParent = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +49,6 @@ public class OpenPakaPage extends AppCompatActivity implements ValueEventListene
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
         thisUser.setEmail(mAuth.getCurrentUser().getEmail());
-        q = dataRef.orderByChild("userEmail").equalTo(thisUser.getEmail());
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         addPakaButton.setOnClickListener(cl);
         backButton.setOnClickListener(cl);
         signOutButton.setOnClickListener(cl);
@@ -59,14 +58,16 @@ public class OpenPakaPage extends AppCompatActivity implements ValueEventListene
     protected void onStart() {
         super.onStart();
 
-        q.addValueEventListener(this);
+        dataRefUser.addValueEventListener(this);
     }
 
     @Override
     public void onDataChange(DataSnapshot dataSnapshot) {
-        for (DataSnapshot postSnapshot: dataSnapshot.getChildren()){
-            username = postSnapshot.child("first name").getValue(String.class);
+        for (DataSnapshot d: dataSnapshot.getChildren()){
+            username = d.child("first name").getValue(String.class);
             nameText.setText("שלום " + username);
+            if (((String)d.child("userMail").getValue()).equals(currentUser.getEmail()))
+                permission = (String)d.child("permission").getValue();
         }
     }
 
@@ -88,7 +89,17 @@ public class OpenPakaPage extends AppCompatActivity implements ValueEventListene
     }
 
     private void updateUI(View view) {
-        addPakaButton.setVisibility(view.INVISIBLE);
+        if (!isAdmin()){
+            View v = new View(getApplicationContext());
+            v.getRootView().findViewById(R.id.profitSumText);
+            v.setVisibility(v.INVISIBLE);
+        }
+    }
+
+    private boolean isAdmin() {
+        if (permission.equals("מנהל ראשי"))
+            return true;
+        return false;
     }
 
     private class onClickListener implements View.OnClickListener {
@@ -98,7 +109,7 @@ public class OpenPakaPage extends AppCompatActivity implements ValueEventListene
             if (v.getId() == addPakaButton.getId())
                 startActivityButton(3);
             else if (v.getId() == backButton.getId())
-                finish();
+                startActivityButton(4);
             else if (v.getId() == signOutButton.getId())
             {
                 mAuth.signOut();
@@ -109,19 +120,24 @@ public class OpenPakaPage extends AppCompatActivity implements ValueEventListene
 
 
     private void startActivityButton(int butt) {
-        if (butt == 1)
-        {
+        if (butt == 1) {
             Intent i = new Intent(this, LoginPage.class);
+            finish();
             startActivity(i);
         }
-        else if (butt == 2)
-        {
+        else if (butt == 2) {
             Intent i = new Intent(this, PakaPage.class);
+            i.putExtra("pakaKey", pakaParent);
+            finish();
             startActivity(i);
         }
-        else if (butt == 3)
-        {
+        else if (butt == 3) {
             Intent i = new Intent(this, AddPakaPage.class);
+            startActivity(i);
+        }
+        else if (butt == 4){
+            Intent i = new Intent(this, MainPage.class);
+            finish();
             startActivity(i);
         }
     }

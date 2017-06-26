@@ -1,5 +1,6 @@
 package com.example.elad.gamaepsilonapp;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -29,6 +30,7 @@ public class MainPage extends AppCompatActivity implements ValueEventListener{
     private DatabaseReference dataRef = database.getReference("userTable");
     private String email = currentUser.getEmail();
     private String username;
+    private ProgressDialog mProgressDialog;
     private Query q = dataRef.orderByChild("userMail").equalTo(email);
 
     @Override
@@ -36,6 +38,11 @@ public class MainPage extends AppCompatActivity implements ValueEventListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
 
+        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setMessage("טוען...");
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.show();
         nameText = (TextView)findViewById(R.id.nameText);
         openPakaButton = (Button)findViewById(R.id.openPakaButton);
         searchButton = (Button)findViewById(R.id.searchButton);
@@ -57,8 +64,10 @@ public class MainPage extends AppCompatActivity implements ValueEventListener{
     @Override
     public void onDataChange(DataSnapshot dataSnapshot) {
         for (DataSnapshot postSnapshot: dataSnapshot.getChildren()){
-            username = postSnapshot.child("firstName").getValue(String.class);
+            username = (String)postSnapshot.child("firstName").getValue();
             nameText.setText("שלום " + username);
+            while (nameText.getText().equals(""));
+            mProgressDialog.dismiss();
         }
     }
 
@@ -72,34 +81,42 @@ public class MainPage extends AppCompatActivity implements ValueEventListener{
 
         @Override
         public void onClick(View v) {
-            if (v.getId() == openPakaButton.getId())
+            if (v.getId() == openPakaButton.getId()) {
                 startActivityButton(1);
-            else if (v.getId() == searchButton.getId())
+            }
+            else if (v.getId() == searchButton.getId()) {
                 startActivityButton(2);
-            else if (v.getId() == managmentButton.getId())
+            }
+            else if (v.getId() == managmentButton.getId()) {
                 startActivityButton(3);
+            }
             else if (v.getId() == signOutButton.getId())
             {
                 mAuth.signOut();
-                finish();
+                startActivityButton(4);
             }
         }
     }
 
     private void startActivityButton(int butt) {
-        if (butt == 1)
-        {
+        if (butt == 1) {
             Intent i = new Intent(this, OpenPakaPage.class);
+            finish();
             startActivity(i);
         }
-        else if (butt == 2)
-        {
+        else if (butt == 2) {
             Intent i = new Intent(this, Searchpage.class);
+            finish();
             startActivity(i);
         }
-        else if (butt == 3)
-        {
+        else if (butt == 3) {
             Intent i = new Intent(this, ManagmentPage.class);
+            finish();
+            startActivity(i);
+        }
+        else if (butt == 4){
+            Intent i = new Intent(this, LoginPage.class);
+            finish();
             startActivity(i);
         }
     }

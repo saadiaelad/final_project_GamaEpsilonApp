@@ -23,6 +23,7 @@ public class ManagmentPage extends AppCompatActivity implements ValueEventListen
     private Button addRemoveSupervisor;
     private Button signOutButton;
     private Button backButton;
+    private Button addRemoveWork;
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -41,6 +42,7 @@ public class ManagmentPage extends AppCompatActivity implements ValueEventListen
         addRemoveSupervisor = (Button)findViewById(R.id.addRemoveSupervisor);
         signOutButton = (Button)findViewById(R.id.signOutButton);
         backButton = (Button)findViewById(R.id.backButton);
+        addRemoveWork = (Button)findViewById(R.id.addRemoveWork);
 
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
@@ -49,6 +51,7 @@ public class ManagmentPage extends AppCompatActivity implements ValueEventListen
         addRemoveSupervisor.setOnClickListener(new OnClickListener());
         signOutButton.setOnClickListener(new OnClickListener());
         backButton.setOnClickListener(new OnClickListener());
+        addRemoveWork.setOnClickListener(new OnClickListener());
     }
 
     @Override
@@ -83,24 +86,33 @@ public class ManagmentPage extends AppCompatActivity implements ValueEventListen
                 startActivityButton(1);
             }
             else if (v.getId() == backButton.getId())
-                finish();
+                startActivityButton(4);
+            else if (v.getId() == addRemoveWork.getId())
+                startActivityButton(5);
         }
     }
 
     private void startActivityButton(int butt) {
-        if (butt == 1)
-        {
+        if (butt == 1) {
             Intent i = new Intent(this, LoginPage.class);
+            finish();
             startActivity(i);
         }
-        if (butt == 2)
-        {
-            Intent i = new Intent(this, addRemoveUser.class);
+        else if (butt == 2) {
+            Intent i = new Intent(this, AddRemoveUser.class);
             startActivity(i);
         }
-        if (butt == 3)
-        {
-            Intent i = new Intent(this, addRemoveSupervisor.class);
+        else if (butt == 3) {
+            Intent i = new Intent(this, AddRemoveSupervisor.class);
+            startActivity(i);
+        }
+        else if (butt == 4) {
+            Intent i = new Intent(this, MainPage.class);
+            finish();
+            startActivity(i);
+        }
+        else if (butt == 5) {
+            Intent i = new Intent(this, AddRemoveWork.class);
             startActivity(i);
         }
     }

@@ -23,11 +23,17 @@
         <activity android:name=".MainPage" />
         <activity android:name=".OpenPakaPage" />
         <activity android:name=".PakaPage" />
-        <activity android:name=".AddPakaPage" />
+        <activity
+            android:name=".AddPakaPage"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".Searchpage" />
         <activity android:name=".ManagmentPage" />
-        <activity android:name=".addRemoveUser" />
-        <activity android:name=".addRemoveSupervisor"></activity>
+        <activity
+            android:name=".AddRemoveUser"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".AddRemoveSupervisor" />
+        <activity android:name=".AddRemoveWork" />
+        <activity android:name=".PakaDetails"></activity>
     </application>
 
 </manifest>

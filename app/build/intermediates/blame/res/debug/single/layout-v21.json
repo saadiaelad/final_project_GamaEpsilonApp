@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "C:\\Users\\elad\\AndroidStudioProjects\\GamaEpsilonApp\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_template_icon_group.xml",
+        "source": "C:\\Users\\elad\\.android\\build-cache\\54fc8c57366989589118329a859490090270609d\\output\\res\\layout-v21\\notification_template_icon_group.xml"
+    },
+    {
+        "merged": "C:\\Users\\elad\\AndroidStudioProjects\\GamaEpsilonApp\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_template_custom_big.xml",
+        "source": "C:\\Users\\elad\\.android\\build-cache\\54fc8c57366989589118329a859490090270609d\\output\\res\\layout-v21\\notification_template_custom_big.xml"
+    },
+    {
+        "merged": "C:\\Users\\elad\\AndroidStudioProjects\\GamaEpsilonApp\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_action.xml",
+        "source": "C:\\Users\\elad\\.android\\build-cache\\54fc8c57366989589118329a859490090270609d\\output\\res\\layout-v21\\notification_action.xml"
+    },
+    {
+        "merged": "C:\\Users\\elad\\AndroidStudioProjects\\GamaEpsilonApp\\app\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_action_tombstone.xml",
+        "source": "C:\\Users\\elad\\.android\\build-cache\\54fc8c57366989589118329a859490090270609d\\output\\res\\layout-v21\\notification_action_tombstone.xml"
+    }
+]

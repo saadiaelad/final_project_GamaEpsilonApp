@@ -66,6 +66,22 @@
 
     <string name="firebase_location" translatable="false">https://gamaepsilonapp.firebaseio.com/</string>
     <string name="action_settings">settings</string>
+    <string name="back_button2">חזרה</string>
+    <string name="delete_image_button">deleteButton</string>
+    <string name="edit_image_button">editButton</string>
+    <string name="back_button3">חזרה</string>
+    <string name="back_to_open_paka_page_button">חזרה</string>
+    <string name="add_remove_work_text">הוספה או הסרה של עבודה</string>
+    <string name="small_name_text">שם מקוצר</string>
+    <string name="full_name_text">שם מלא</string>
+    <string name="price_text">מחיר</string>
+    <string name="work_number_text">מספר עבודה</string>
+    <string name="arabic_name_text">שם בערבית</string>
+    <string name="accept_button4">אישור</string>
+    <string name="back_button4">חזרה</string>
+    <string name="add_remove_work">הוספה או הסרה של עבודה</string>
+    <string name="back_button6">חזרה</string>
+    <string name="details_text">פרטים</string>
 
     <string-array name="permissionOptions">
         <item>בחר סוג עובד</item>
@@ -90,6 +106,12 @@
         <item>מפקח + תאריך</item>
         <item>תאט + תאריך</item>
         <item>עובד + חודש</item>
+    </string-array>
+
+    <string-array name="unitsOption">
+        <item>בחר סוג יחידות</item>
+        <item>יחידות</item>
+        <item>מטר</item>
     </string-array>
 
 </resources>

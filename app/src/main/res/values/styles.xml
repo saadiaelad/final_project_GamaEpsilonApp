@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -6,6 +6,42 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="openDateDialog" parent="AppBaseTheme">
+        <item name="android:datePickerStyle">@style/MyDatePickerStyle</item>
+    </style>
+
+    <style name="AppBaseTheme" parent="android:Theme.DeviceDefault.Light.Dialog">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="MyDatePickerStyle" tools:targetApi="lollipop">
+        <item name="android:headerBackground">@color/colorPrimary</item>
+        <item name="android:calendarTextColor">@color/colorPrimaryDark</item>
+        <item name="android:dayOfWeekBackground">@color/colorPrimaryDark</item>
+        <item name="android:yearListSelectorColor">@color/colorAccent</item>
+        <item name="android:datePickerMode">calendar</item>
+        <item name="android:minDate">01/01/2000</item>
+    </style>
+
+    <style name="spinner" parent="AppBaseTheme">
+        <item name="android:dialogTheme">@style/SpinnerDialog</item>
+        <item name="android:alertDialogTheme">@style/SpinnerAlertDialog</item>
+    </style>
+
+    <style name="SpinnerDialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:popupBackground">#ff00ff</item>
+        <item name="colorPrimary">#ff00ff</item>
+        <item name="colorPrimaryDark">#ffff00</item>
+        <item name="colorAccent">#ff0000</item>
+    </style>
+
+    <style name="SpinnerAlertDialog" parent="Theme.AppCompat.Dialog">
+        <item name="colorPrimary">#00ffff</item>
+        <item name="colorPrimaryDark">#00ff00</item>
+        <item name="colorAccent">#0000ff</item>
     </style>
 
 </resources>

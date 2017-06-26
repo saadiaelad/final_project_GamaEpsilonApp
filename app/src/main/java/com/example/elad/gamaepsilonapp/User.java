@@ -4,29 +4,29 @@ package com.example.elad.gamaepsilonapp;
  * Created by elad on 18/06/2017.
  */
 public class User {
-    String firsName;
+    String firstName;
     String lastName;
     String phoneNumber;
     String permission;
-    String email;
+    String userMail;
     boolean constractor;
 
     public User(){
 
     }
 
-    public User(String firsName, String lastName, String phoneNumber, String permission,
+    public User(String firstName, String lastName, String phoneNumber, String permission,
                 String email, boolean constractor, int role) {
-        this.firsName = firsName;
+        this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.permission = permission;
-        this.email = email;
+        this.userMail = email;
         this.constractor = constractor;
     }
 
-    public String getFirsName() {
-        return firsName;
+    public String getFirstName() {
+        return firstName;
     }
 
     public String getLastName() {
@@ -42,15 +42,15 @@ public class User {
     }
 
     public String getEmail() {
-        return email;
+        return userMail;
     }
 
     public boolean isConstractor() {
         return constractor;
     }
 
-    public void setFirsName(String firsName) {
-        this.firsName = firsName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public void setLastName(String lastName) {
@@ -66,7 +66,7 @@ public class User {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.userMail = email;
     }
 
     public void setConstractor(boolean constractor) {

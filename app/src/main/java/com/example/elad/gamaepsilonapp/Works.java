@@ -7,8 +7,7 @@ package com.example.elad.gamaepsilonapp;
 public class Works {
     String abbriviatedName;
     String arbicName;
-    double cost;
-    int id;
+    String  cost;
     String fullName;
     String units;
     String workNum;
@@ -17,11 +16,10 @@ public class Works {
 
     }
 
-    public Works(String abbriviatedName, String arbicName, double cost, int id, String fullName, String units, String workNum) {
+    public Works(String abbriviatedName, String arbicName, String  cost, String fullName, String units, String workNum) {
         this.abbriviatedName = abbriviatedName;
         this.arbicName = arbicName;
         this.cost = cost;
-        this.id = id;
         this.fullName = fullName;
         this.units = units;
         this.workNum = workNum;
@@ -43,20 +41,12 @@ public class Works {
         this.arbicName = arbicName;
     }
 
-    public double getCost() {
+    public String  getCost() {
         return cost;
     }
 
-    public void setCost(double cost) {
+    public void setCost(String cost) {
         this.cost = cost;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getFullName() {
