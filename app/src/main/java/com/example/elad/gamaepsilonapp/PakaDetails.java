@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -65,7 +64,7 @@ public class PakaDetails extends AppCompatActivity implements ValueEventListener
         classText = (TextView)findViewById(R.id.classText);
         openOrCloseText = (TextView)findViewById(R.id.openOrCloseText);
         tatOrNotText = (TextView)findViewById(R.id.tatOrNotText);
-        supervisorText = (TextView)findViewById(R.id.supervisorNameText);
+        supervisorText = (TextView)findViewById(R.id.supervisorText);
         periortyText = (TextView)findViewById(R.id.periortyText);
         openDateText = (TextView)findViewById(R.id.openDateText);
         startDateText = (TextView)findViewById(R.id.makingDateText);
@@ -138,27 +137,53 @@ public class PakaDetails extends AppCompatActivity implements ValueEventListener
     public void onDataChange(DataSnapshot dataSnapshot) {
         switch (dataSnapshot.getKey()) {
             case "pakaTable":
-                Toast.makeText(this, "" + pakaKey, Toast.LENGTH_SHORT).show();
                 for (DataSnapshot d : dataSnapshot.getChildren()) {
-                    if (d.getKey().equals(pakaKey)) {
-                        pakaNumberText.setText((String) d.child("pakaNum").getValue());
-                        addressText.setText((String) d.child("address").getValue());
-                        classText.setText((String) d.child("className").getValue());
-                        openOrCloseText.setText((String) d.child("openOrClose").getValue());
-                        tatOrNotText.setText((String) d.child("tat").getValue());
-                        openDateText.setText((String) d.child("openDate").getValue());
-                        startDateText.setText((String) d.child("startingDate").getValue());
-                        closeDateText.setText((String) d.child("closingDate").getValue());
-                        supervisorText.setText((String) d.child("supervisor").getValue());
-                        periortyText.setText((String) d.child("periorty").getValue());
-                        profitText.setText((String) d.child("price").getValue());
-                        pakaCommitText.setText((String) d.child("commit").getValue());
-                        for (DataSnapshot ds : d.child("teamLeader").getChildren())
-                            teamLeaderList.add((String) ds.getValue());
-                        for (DataSnapshot ds : d.child("workers").getChildren())
-                            workersList.add((String) ds.getValue());
-                        for (DataSnapshot ds : d.child("workPerfomed").getChildren())
-                            worksList.add((String) ds.getValue());
+                    if (d.getValue() != null) {
+                        if (d.child("pakaNum").getValue() != null) {
+                            if (d.child("pakaNum").getValue().toString().equals(pakaKey)) {
+                                pakaNumberText.setText((String) d.child("pakaNum").getValue());
+                                if (d.child("address").getValue() != null)
+                                    addressText.setText((String) d.child("address").getValue());
+                                if (d.child("className").getValue() != null)
+                                    classText.setText((String) d.child("className").getValue());
+                                boolean setOpenOrCose = d.child("openOrClose").getValue(boolean.class);
+                                if (setOpenOrCose)
+                                    openOrCloseText.setText("סגור");
+                                else
+                                    openOrCloseText.setText("פתוח");
+                                boolean setTatOrNot = d.child("tat").getValue(boolean.class);
+                                if (setTatOrNot)
+                                    tatOrNotText.setText("בהוט");
+                                else
+                                    tatOrNotText.setText("לא בהוט");
+                                if (d.child("openDate").getValue() != null)
+                                    openDateText.setText((String) d.child("openDate").getValue());
+                                if (d.child("startingDate").getValue() != null)
+                                    startDateText.setText((String) d.child("startingDate").getValue());
+                                if (d.child("closingDate").getValue() != null)
+                                    closeDateText.setText((String) d.child("closingDate").getValue());
+                                if (d.child("supervisor").getValue() != null)
+                                    supervisorText.setText((String)d.child("supervisor").getValue());
+                                if (d.child("periorty").getValue() != null)
+                                    periortyText.setText((String) d.child("periorty").getValue());
+                                if (d.child("price").getValue() != null)
+                                    profitText.setText((String) d.child("price").getValue());
+                                if (d.child("commit").getValue() != null)
+                                    pakaCommitText.setText((String) d.child("commit").getValue());
+                                if (d.child("pakaNum").getValue() != null)
+                                    for (DataSnapshot ds : d.child("teamLeader").getChildren())
+                                        if (ds.getValue() != null)
+                                            teamLeaderList.add((String) ds.getValue());
+                                if (d.child("pakaNum").getValue() != null)
+                                    for (DataSnapshot ds : d.child("workers").getChildren())
+                                        if (ds.getValue() != null)
+                                            workersList.add((String) ds.getValue());
+                                if (d.child("pakaNum").getValue() != null)
+                                    for (DataSnapshot ds : d.child("workPerfomed").getChildren())
+                                        if (ds.getValue() != null)
+                                            worksList.add((String) ds.getValue());
+                            }
+                        }
                     }
                 }
             case "userTable":

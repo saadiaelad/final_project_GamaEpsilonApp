@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,7 +25,6 @@ public class PakaPage extends AppCompatActivity implements ValueEventListener,
         AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
 
     String countChange = "";
-    private Paka paka;
     private ArrayList<String> worksArray = new ArrayList<>();
     private ArrayList<String> choosenWorksArray = new ArrayList<>();
     private String pakaKey = null;
@@ -99,9 +97,11 @@ public class PakaPage extends AppCompatActivity implements ValueEventListener,
             }
             case "pakaTable": {
                 for (DataSnapshot d : dataSnapshot.getChildren()) {
-                    if (d.getKey().equals(pakaKey)) {
-                        paka = d.getValue(Paka.class);
-                        setView();
+                    if (d.child("pakaNum").getValue() != null) {
+                        if (d.child("pakaNum").getValue().toString().equals(pakaKey)) {
+                            Paka paka = d.getValue(Paka.class);
+                            setView(paka);
+                        }
                     }
                 }
             }
@@ -115,7 +115,7 @@ public class PakaPage extends AppCompatActivity implements ValueEventListener,
         }
     }
 
-    private void setView() {
+    private void setView(Paka paka) {
         if (paka.getWorkPerfomed() != null){
             for (int i = 0 ; i > paka.getWorkPerfomed().size() ; i++){
                 choosenWorksArray.add(paka.getWorkPerfomed().get(i));
@@ -181,7 +181,6 @@ public class PakaPage extends AppCompatActivity implements ValueEventListener,
             Intent i = new Intent(this, PakaDetails.class);
             if (pakaKey != null)
                 i.putExtra("pakaKey", pakaKey);
-            Toast.makeText(this, "" + pakaKey, Toast.LENGTH_SHORT).show();
             startActivity(i);
         }
     }

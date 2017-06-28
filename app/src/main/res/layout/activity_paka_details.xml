@@ -47,6 +47,7 @@
         android:layout_alignStart="@+id/addressText"
         android:background="@drawable/edittext_drawable"
         android:ems="10"
+        android:textStyle="bold"
         android:gravity="right"
         android:textDirection="firstStrongRtl"
         tools:ignore="LabelFor,RtlHardcoded,TextFields" />
@@ -60,6 +61,7 @@
         android:layout_marginTop="24dp"
         android:background="@drawable/edittext_drawable"
         android:ems="10"
+        android:textStyle="bold"
         android:gravity="right"
         android:textDirection="firstStrongRtl"
         tools:ignore="LabelFor,RtlHardcoded" />
@@ -74,6 +76,7 @@
         android:background="@drawable/edittext_drawable"
         android:ems="10"
         android:gravity="right"
+        android:textStyle="bold"
         android:textDirection="firstStrongRtl"
         tools:ignore="LabelFor,MissingConstraints,RtlHardcoded"
         tools:layout_editor_absoluteX="584dp"
@@ -85,6 +88,7 @@
         android:layout_height="40dp"
         android:background="@drawable/edittext_drawable"
         android:gravity="right"
+        android:textStyle="bold"
         android:textDirection="firstStrongRtl"
         tools:ignore="RtlHardcoded"
         android:layout_below="@+id/pakaDetailsText"
@@ -99,6 +103,7 @@
         android:layout_toEndOf="@+id/classText"
         android:background="@drawable/edittext_drawable"
         android:gravity="right"
+        android:textStyle="bold"
         android:textDirection="firstStrongRtl"
         tools:ignore="MissingConstraints,RtlHardcoded" />
 
@@ -114,6 +119,7 @@
         android:id="@+id/supervisorText"
         android:layout_width="200dp"
         android:layout_height="40dp"
+        android:textStyle="bold"
         android:layout_below="@+id/pakaDetailsText"
         android:layout_toEndOf="@+id/pakaNumberText"
         android:background="@drawable/edittext_drawable" />
@@ -122,6 +128,7 @@
         android:id="@+id/periortyText"
         android:layout_width="150dp"
         android:layout_height="40dp"
+        android:textStyle="bold"
         android:layout_alignBaseline="@+id/addressText"
         android:layout_alignBottom="@+id/addressText"
         android:layout_toEndOf="@+id/addressText"
@@ -139,6 +146,7 @@
         android:ems="10"
         android:focusable="false"
         android:gravity="right"
+        android:textStyle="bold"
         android:textDirection="firstStrongRtl"
         tools:ignore="LabelFor,RtlHardcoded"
         android:layout_below="@+id/pakaDetailsText"
@@ -152,6 +160,7 @@
         android:ems="10"
         android:focusable="false"
         android:gravity="right"
+        android:textStyle="bold"
         android:textDirection="firstStrongRtl"
         tools:ignore="LabelFor,RtlHardcoded"
         android:layout_below="@+id/pakaDetailsText"
@@ -165,6 +174,7 @@
         android:ems="10"
         android:focusable="false"
         android:gravity="right"
+        android:textStyle="bold"
         android:textDirection="firstStrongRtl"
         tools:ignore="LabelFor,RtlHardcoded"
         android:layout_below="@+id/pakaDetailsText"
@@ -179,6 +189,7 @@
         android:layout_toEndOf="@+id/addressText"
         android:background="@drawable/edittext_drawable"
         android:ems="10"
+        android:textStyle="bold"
         android:gravity="right"
         android:textDirection="firstStrongRtl"
         tools:ignore="LabelFor,RtlHardcoded" />
@@ -191,6 +202,7 @@
         android:layout_alignEnd="@+id/backToOpenPakaPage"
         android:background="@drawable/edittext_drawable"
         android:ems="10"
+        android:textStyle="bold"
         android:gravity="top|center"
         android:textDirection="firstStrongRtl" />
 

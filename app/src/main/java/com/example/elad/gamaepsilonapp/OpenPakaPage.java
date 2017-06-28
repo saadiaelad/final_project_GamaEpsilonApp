@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -44,7 +45,7 @@ public class OpenPakaPage extends AppCompatActivity implements ValueEventListene
     private ProgressDialog mProgressDialog;
     private User thisUser = new User();
     private Paka paka = new Paka();
-    private String pakaParent = "";
+    private String pakaKey = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,8 +97,7 @@ public class OpenPakaPage extends AppCompatActivity implements ValueEventListene
                             if (d.child("openOrClose").getValue() != null){
                                 if (!(boolean)d.child("openOrClose").getValue()) {
                                     Paka paka = new Paka();
-                                    paka.setAddress(d.child("address").getValue().toString());
-                                    paka.setPakaNum(d.child("pakaNum").getValue().toString());
+                                    paka = d.getValue(Paka.class);
                                     addPakaToList(paka);
                                 }
                             }
@@ -111,10 +111,9 @@ public class OpenPakaPage extends AppCompatActivity implements ValueEventListene
                                         ArrayList<String> job = new ArrayList<>();
                                         job = (ArrayList<String>) d.child("teamLeader").getValue();
                                         if (job.get(job.size() - 1).equals(username)) {
-                                            Paka paka = new Paka();
-                                            paka.setAddress(d.child("address").getValue().toString());
-                                            paka.setPakaNum(d.child("pakaNum").getValue().toString());
-                                            addPakaToList(paka);
+                                            Paka p = new Paka();
+                                            p = d.getValue(Paka.class);
+                                            addPakaToList(p);
                                         }
                                     }
 
@@ -184,7 +183,7 @@ public class OpenPakaPage extends AppCompatActivity implements ValueEventListene
         }
         else if (butt == 2) {
             Intent i = new Intent(this, PakaPage.class);
-            i.putExtra("pakaKey", pakaParent);
+            i.putExtra("pakaKey", pakaKey);
             finish();
             startActivity(i);
         }
@@ -200,7 +199,6 @@ public class OpenPakaPage extends AppCompatActivity implements ValueEventListene
     }
 
     public void onItemClick(AdapterView<?> adapterView, View v, int position, long id) {
-
     }
 
 
@@ -208,6 +206,9 @@ public class OpenPakaPage extends AppCompatActivity implements ValueEventListene
 
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            int pos = adapterView.getSelectedItemPosition() + 1;
+            Toast.makeText(OpenPakaPage.this, "" + pos, Toast.LENGTH_SHORT).show();
+            pakaKey = pakaNumberList.get(pos);
             startActivityButton(2);
         }
     }
