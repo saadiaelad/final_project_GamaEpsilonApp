@@ -40,15 +40,15 @@
         android:layout_below="@+id/workOptionSpinner" />
 
     <TextView
-        android:text="שלום זאן קלוד"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/logo"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="25dp"
         android:id="@+id/nameText"
-        tools:ignore="HardcodedText"
-        android:textStyle="bold" />
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginRight="430dp"
+        android:layout_marginTop="220dp"
+        android:textColor="@android:color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        tools:ignore="RtlHardcoded" />
 
     <Button
         android:text="@string/back_butt2"

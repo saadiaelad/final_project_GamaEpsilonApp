@@ -6,8 +6,8 @@
         jar="C:\Users\elad\AndroidStudioProjects\GamaEpsilonApp\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
-        revision="25.0.3"
-        sha1="152412d85b50fa28fe944fe4578a3b18c259a879">
+        revision="26.0.0"
+        sha1="6a05b1c78d471c6c2881c8f97b3798cc01612d3a">
         <dex dex="C:\Users\elad\AndroidStudioProjects\GamaEpsilonApp\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_8aeaba44d975644e8943cf92408db2f96b72b3be\classes.dex" />
     </item>
     <item
@@ -15,7 +15,7 @@
         jar="C:\Users\elad\AndroidStudioProjects\GamaEpsilonApp\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
         jumboMode="true"
         optimize="true"
-        revision="25.0.3"
+        revision="26.0.0"
         sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
         <dex dex="C:\Users\elad\AndroidStudioProjects\GamaEpsilonApp\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_bff13824d74acb9790173ea189ba26babfb7e1ee\classes.dex" />
     </item>

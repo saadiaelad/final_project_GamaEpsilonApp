@@ -1,10 +1,12 @@
 package com.example.elad.gamaepsilonapp;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -18,20 +20,28 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class OpenPakaPage extends AppCompatActivity implements ValueEventListener{
 
+    private ArrayList<String> pakaNumberList = new ArrayList<>();
+    private ArrayList<String> addressList = new ArrayList<>();
     private String permission;
     private TextView nameText;
     private ImageButton addPakaButton;
-    private ListView pakaList;
+    private ListView pakaNumberListView;
+    private ListView addressListView;
     private Button backButton;
     private Button signOutButton;
-    private FirebaseAuth mAuth;
-    private FirebaseUser currentUser;
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private FirebaseUser currentUser = mAuth.getCurrentUser();;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference dataRefUser = database.getReference("userTable");
+    private DatabaseReference dataRefPaka = database.getReference("pakaTable");
+    private String email = currentUser.getEmail();
     private onClickListener cl = new onClickListener();
     private String username;
+    private ProgressDialog mProgressDialog;
     private User thisUser = new User();
     private Paka paka = new Paka();
     private String pakaParent = "";
@@ -41,13 +51,17 @@ public class OpenPakaPage extends AppCompatActivity implements ValueEventListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_open_paka_page);
 
+        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setMessage("טוען...");
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.show();
         nameText = (TextView)findViewById(R.id.nameText);
         addPakaButton = (ImageButton)findViewById(R.id.addPakaButton);
-        pakaList = (ListView)findViewById(R.id.pakasList);
+        pakaNumberListView = (ListView)findViewById(R.id.pakaNumberListView);
+        addressListView = (ListView)findViewById(R.id.addressListView);
         backButton = (Button)findViewById(R.id.backButton);
         signOutButton = (Button)findViewById(R.id.signOutButton);
-        mAuth = FirebaseAuth.getInstance();
-        currentUser = mAuth.getCurrentUser();
         thisUser.setEmail(mAuth.getCurrentUser().getEmail());
         addPakaButton.setOnClickListener(cl);
         backButton.setOnClickListener(cl);
@@ -59,16 +73,71 @@ public class OpenPakaPage extends AppCompatActivity implements ValueEventListene
         super.onStart();
 
         dataRefUser.addValueEventListener(this);
+        dataRefPaka.addValueEventListener(this);
     }
 
     @Override
     public void onDataChange(DataSnapshot dataSnapshot) {
-        for (DataSnapshot d: dataSnapshot.getChildren()){
-            username = d.child("first name").getValue(String.class);
-            nameText.setText("שלום " + username);
-            if (((String)d.child("userMail").getValue()).equals(currentUser.getEmail()))
-                permission = (String)d.child("permission").getValue();
+        switch (dataSnapshot.getKey()){
+            case ("userTable"): {
+                for (DataSnapshot d : dataSnapshot.getChildren()) {
+                    username = (String)d.child("firstName").getValue();
+                    nameText.setText("שלום " + username);
+                    if (((String)d.child("userMail").getValue()).equals(currentUser.getEmail()))
+                        permission = (String) d.child("permission").getValue();
+                }
+                updateUI();
+                mProgressDialog.dismiss();
+            }
+            case ("pakaTable"): {
+                switch (permission){
+                    case ("מנהל ראשי"): {
+                        for (DataSnapshot d:dataSnapshot.getChildren()){
+                            if (d.child("openOrClose").getValue() != null){
+                                if (!(boolean)d.child("openOrClose").getValue()) {
+                                    Paka paka = new Paka();
+                                    paka.setAddress(d.child("address").getValue().toString());
+                                    paka.setPakaNum(d.child("pakaNum").getValue().toString());
+                                    addPakaToList(paka);
+                                }
+                            }
+                        }
+                    }
+                    case ("מנהל צוות"): {
+                        for (DataSnapshot d:dataSnapshot.getChildren()){
+                            if (d.child("openOrClose").getValue() != null){
+                                if (!(boolean)d.child("openOrClose").getValue()){
+                                    if (d.child("teamLeader").getValue() != null) {
+                                        ArrayList<String> job = new ArrayList<>();
+                                        job = (ArrayList<String>) d.child("teamLeader").getValue();
+                                        if (job.get(job.size() - 1).equals(username)) {
+                                            Paka paka = new Paka();
+                                            paka.setAddress(d.child("address").getValue().toString());
+                                            paka.setPakaNum(d.child("pakaNum").getValue().toString());
+                                            addPakaToList(paka);
+                                        }
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
+    }
+
+    private void addPakaToList(Paka paka) {
+        pakaNumberList.add(paka.getPakaNum());
+        addressList.add(paka.getAddress());
+        final ArrayAdapter<String> openPakaNumberList = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, pakaNumberList);
+        pakaNumberListView.setAdapter(openPakaNumberList);
+        pakaNumberListView.setOnItemClickListener(new onItemCliclListener());
+        final ArrayAdapter<String> openAddressList = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, addressList);
+        addressListView.setAdapter(openAddressList);
+        addressListView.setOnItemClickListener(new onItemCliclListener());
     }
 
     @Override
@@ -76,29 +145,17 @@ public class OpenPakaPage extends AppCompatActivity implements ValueEventListene
 
     }
 
-
-    private void whoIstheUser() {
-//        switch (currentUser.getUid()){
-//            case "ZOjgToMldhejfnHeQPRb1sv1SLg2":
-//                break;
-//            case "Tq5SuScNhOXvBOqOsN1tDQBbz2o2":
-//                break;
-//            default:
-//                updateUI(this.addPakaButton);
-//        }
-    }
-
-    private void updateUI(View view) {
+    private void updateUI() {
         if (!isAdmin()){
-            View v = new View(getApplicationContext());
-            v.getRootView().findViewById(R.id.profitSumText);
-            v.setVisibility(v.INVISIBLE);
+            backButton.setVisibility(View.INVISIBLE);
+            addPakaButton.setVisibility(View.INVISIBLE);
         }
     }
 
     private boolean isAdmin() {
-        if (permission.equals("מנהל ראשי"))
-            return true;
+        if (permission != null)
+            if (permission.equals("מנהל ראשי"))
+                return true;
         return false;
     }
 
@@ -142,10 +199,16 @@ public class OpenPakaPage extends AppCompatActivity implements ValueEventListene
         }
     }
 
-    public void onItemClick(AdapterView<?> adapterView, View v, int position, long id)
-    {
-        startActivityButton(2);
+    public void onItemClick(AdapterView<?> adapterView, View v, int position, long id) {
+
     }
 
 
+    private class onItemCliclListener implements AdapterView.OnItemClickListener {
+
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            startActivityButton(2);
+        }
+    }
 }

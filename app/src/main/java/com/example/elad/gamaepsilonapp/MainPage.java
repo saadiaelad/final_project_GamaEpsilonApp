@@ -24,8 +24,8 @@ public class MainPage extends AppCompatActivity implements ValueEventListener{
     private Button searchButton;
     private Button managmentButton;
     private Button signOutButton;
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();;
-    private FirebaseUser currentUser = mAuth.getCurrentUser();;
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private FirebaseUser currentUser = mAuth.getCurrentUser();
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference dataRef = database.getReference("userTable");
     private String email = currentUser.getEmail();
@@ -105,7 +105,7 @@ public class MainPage extends AppCompatActivity implements ValueEventListener{
             startActivity(i);
         }
         else if (butt == 2) {
-            Intent i = new Intent(this, Searchpage.class);
+            Intent i = new Intent(this, SearchPage.class);
             finish();
             startActivity(i);
         }

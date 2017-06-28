@@ -13,13 +13,13 @@
     android:background="@android:color/white">
 
     <ListView
-        android:layout_width="match_parent"
-        android:id="@+id/pakasList"
-        android:background="@android:color/white"
+        android:id="@+id/pakaNumberListView"
+        android:layout_width="200dp"
         android:layout_height="230dp"
-        android:layout_below="@+id/addPakaButton"
+        android:layout_above="@+id/signOutButton"
         android:layout_alignParentStart="true"
-        android:layout_above="@+id/signOutButton" />
+        android:layout_below="@+id/pakaNumberTextView"
+        android:background="@drawable/edittext_drawable"/>
 
     <ImageView
         android:layout_width="match_parent"
@@ -74,4 +74,33 @@
         android:layout_alignParentBottom="true"
         android:layout_toEndOf="@+id/signOutButton"
         android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/pakaNumberTextView"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:background="@drawable/edittext_drawable"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/nameText"
+        android:gravity="center"
+        android:text="מספר פקע" />
+
+    <ListView
+        android:id="@+id/addressListView"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:layout_below="@+id/pakaNumberTextView"
+        android:layout_toEndOf="@+id/pakaNumberListView"
+        android:layout_alignBottom="@+id/pakaNumberListView"
+        android:background="@drawable/edittext_drawable"/>
+
+    <TextView
+        android:id="@+id/addressTextView"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/edittext_drawable"
+        android:layout_alignTop="@+id/pakaNumberTextView"
+        android:layout_toEndOf="@+id/pakaNumberListView"
+        android:gravity="center"
+        android:text="כתובת" />
 </RelativeLayout>

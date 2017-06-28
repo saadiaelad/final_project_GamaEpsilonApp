@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 
 public class PakaDetails extends AppCompatActivity implements ValueEventListener {
 
-    private String pakaKey;
+    private String pakaKey = null;
     private String permission;
     private ArrayList<String > teamLeaderList = new ArrayList<>();
     private ArrayList<String > workersList = new ArrayList<>();
@@ -42,7 +43,7 @@ public class PakaDetails extends AppCompatActivity implements ValueEventListener
     private ListView teamLeaderListViewText;
     private ListView workersListViewText;
     private ListView worksListViewText;
-    private Button backButton;
+    private Button backToPakaPage;
     private FirebaseListAdapter<String> workerAdapter;
     private FirebaseListAdapter<String> workAdapter;
     private FirebaseListAdapter<String> teamLeaderAdapter;
@@ -74,6 +75,7 @@ public class PakaDetails extends AppCompatActivity implements ValueEventListener
         teamLeaderListViewText = (ListView)findViewById(R.id.teamLeaderText);
         workersListViewText = (ListView)findViewById(R.id.workersListViewText);
         worksListViewText = (ListView)findViewById(R.id.worksListViewText);
+        backToPakaPage = (Button)findViewById(R.id.backToOpenPakaPage);
 
         Bundle bundle = getIntent().getExtras();
         if (bundle.getString("pakaKey") != null)
@@ -96,7 +98,7 @@ public class PakaDetails extends AppCompatActivity implements ValueEventListener
                 android.R.layout.simple_list_item_1, worksList);
         worksListViewText.setAdapter(worksAdapter);
 
-        backButton.setOnClickListener(new onClickListener());
+        backToPakaPage.setOnClickListener(new onClickListener());
 
     }
 
@@ -106,21 +108,19 @@ public class PakaDetails extends AppCompatActivity implements ValueEventListener
 
         dataRefPaka.addValueEventListener(this);
         dataRefUser.addValueEventListener(this);
-        updateUi();
-        progressDialog.dismiss();
     }
 
     private void updateUi() {
         if (!isAdmin()){
             View v = new View(getApplicationContext());
-            v.getRootView().findViewById(R.id.profitSumText);
-            v.setVisibility(v.INVISIBLE);
+            profitText.setVisibility(v.INVISIBLE);
         }
     }
 
     private boolean isAdmin() {
-        if (permission.equals("מנהל ראשי"))
-            return true;
+        if (permission != null)
+            if (permission.equals("מנהל ראשי"))
+                return true;
         return false;
     }
 
@@ -128,7 +128,7 @@ public class PakaDetails extends AppCompatActivity implements ValueEventListener
 
         @Override
         public void onClick(View v) {
-            if (v.getId() == backButton.getId()){
+            if (v.getId() == backToPakaPage.getId()){
                 finish();
             }
         }
@@ -137,7 +137,8 @@ public class PakaDetails extends AppCompatActivity implements ValueEventListener
     @Override
     public void onDataChange(DataSnapshot dataSnapshot) {
         switch (dataSnapshot.getKey()) {
-            case "pkaTable":
+            case "pakaTable":
+                Toast.makeText(this, "" + pakaKey, Toast.LENGTH_SHORT).show();
                 for (DataSnapshot d : dataSnapshot.getChildren()) {
                     if (d.getKey().equals(pakaKey)) {
                         pakaNumberText.setText((String) d.child("pakaNum").getValue());
@@ -162,9 +163,12 @@ public class PakaDetails extends AppCompatActivity implements ValueEventListener
                 }
             case "userTable":
                 for (DataSnapshot d : dataSnapshot.getChildren()) {
-                    if (((String)d.child("userMail").getValue()).equals(currentUser.getEmail()))
-                        permission = (String)d.child("permission").getValue();
+                    if (d.child("userMail").getValue() != null && currentUser.getEmail() != null)
+                        if (((String)d.child("userMail").getValue()).equals(currentUser.getEmail()))
+                            permission = (String)d.child("permission").getValue();
                 }
+                updateUi();
+                progressDialog.dismiss();
         }
     }
 

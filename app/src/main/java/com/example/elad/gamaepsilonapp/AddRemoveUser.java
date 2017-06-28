@@ -3,10 +3,13 @@ package com.example.elad.gamaepsilonapp;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,7 +27,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -72,7 +74,7 @@ public class AddRemoveUser extends AppCompatActivity implements ValueEventListen
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
         progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("אנא המתן, טוען נתונים");
+        progressDialog.setMessage("טוען...");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.show();
         ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.permissionOptions,
@@ -98,9 +100,10 @@ public class AddRemoveUser extends AppCompatActivity implements ValueEventListen
         progressDialog.dismiss();
         countChange ="" + dataSnapshot.getChildrenCount();
         for (DataSnapshot d:dataSnapshot.getChildren()){
-            if (userEmail.getText().toString() != null)
-                if (((String)d.child("userMail").getValue()).equals(userEmail.getText().toString()))
+            if (userEmail.getText() != null && d.child("userMail").getValue() != null) {
+                if (((String) d.child("userMail").getValue()).equals(userEmail.getText().toString()))
                     emailExist = true;
+            }
         }
     }
 
@@ -109,7 +112,7 @@ public class AddRemoveUser extends AppCompatActivity implements ValueEventListen
                 R.layout.user_list_view, dataRef){
 
             @Override
-            protected void populateView(View view, User user, int i) {
+            protected void populateView(View view, final User user, int i) {
                 TextView firstName = (TextView)view.findViewById(R.id.firstNameText);
                 TextView lastName = (TextView)view.findViewById(R.id.lastNameText);
                 TextView permission = (TextView)view.findViewById(R.id.jobTitleText);
@@ -122,18 +125,18 @@ public class AddRemoveUser extends AppCompatActivity implements ValueEventListen
                 permission.setText(user.getPermission());
                 phoneNumber.setText(user.getPhoneNumber());
                 email.setText(user.getEmail());
-//                deleteImageButton.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//
-//                    }
-//                });
-//                editImageButton.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//
-//                    }
-//                });
+                deleteImageButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
+                editImageButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
             }
         };
         workerListView.setAdapter(userAdapter);
@@ -183,7 +186,7 @@ public class AddRemoveUser extends AppCompatActivity implements ValueEventListen
                     userError(6);
                     return;
                 }
-                addUser(v);
+                addUser();
             }
             else if (v.getId() == backButton.getId())
                 startActivityButton();
@@ -191,7 +194,9 @@ public class AddRemoveUser extends AppCompatActivity implements ValueEventListen
     }
 
     private void startActivityButton() {
+        Intent i = new Intent(this, ManagmentPage.class);
         finish();
+        startActivity(i);
     }
 
     private void userError(int i) {
@@ -229,7 +234,9 @@ public class AddRemoveUser extends AppCompatActivity implements ValueEventListen
         }
     }
 
-    private void addUser(View v) {
+    private void addUser() {
+        final String thisUserName = currentUser.getEmail().toString();
+        final String[] thisUserPassword = new String[1];
         final String fN = firstName.getText().toString();
         final String lN = lastName.getText().toString();
         final String pN = phoneNumber.getText().toString();
@@ -237,19 +244,21 @@ public class AddRemoveUser extends AppCompatActivity implements ValueEventListen
         final String userMail = userEmail.getText().toString();
         final boolean con = constractor.isChecked();
         String pass = userPassword.getText().toString();
-        if (!emailExist) {
+        if (emailExist)
+            Toast.makeText(AddRemoveUser.this, "הרישום נכשל, המייל כבר קיים במערכת", Toast.LENGTH_SHORT).show();
+        if (userMail.matches("@gmail.com")) {
             mAuth.createUserWithEmailAndPassword(userMail, pass).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
 
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful())
+                    if (task.isSuccessful()) {
                         Toast.makeText(AddRemoveUser.this, "הרישום הצליח", Toast.LENGTH_SHORT).show();
-                    else {
-                        if (task.getException() instanceof FirebaseAuthUserCollisionException)
-                            Toast.makeText(AddRemoveUser.this, "הרישום נכשל, המייל קיים במערכת", Toast.LENGTH_SHORT).show();
-                        else
-                            Toast.makeText(AddRemoveUser.this, "הרישום נכשל, המייל אינו תקין", Toast.LENGTH_SHORT).show();
+                        mAuth.signOut();
+                        thisUserPassword[0] = openDialog();
+                        mAuth.signInWithEmailAndPassword(thisUserName, thisUserPassword[0]);
                     }
+                    else
+                        Toast.makeText(AddRemoveUser.this, "הרישום נכשל, המייל אינו תקין", Toast.LENGTH_SHORT).show();
                 }
             });
             dataRef.child(countChange).child("firstName").setValue(fN);
@@ -267,7 +276,7 @@ public class AddRemoveUser extends AppCompatActivity implements ValueEventListen
             } else {
                 builder = new AlertDialog.Builder(this);
             }
-            builder.setTitle("addWithoutMail")
+            builder.setTitle("הוספת עובד ללא מייל תקין")
                     .setMessage("המייל או הסיסמא אינם תקינים, המערכת מכינה משתמש מסוג -עובד- האם ברצונך להמשיך?")
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
@@ -291,6 +300,23 @@ public class AddRemoveUser extends AppCompatActivity implements ValueEventListen
         }
     }
 
+    private String openDialog() {
+        String pass;
+        final AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        final EditText input = new EditText(this);
+
+        input.setInputType(InputType.TYPE_CLASS_TEXT| InputType.TYPE_TEXT_VARIATION_PASSWORD);
+
+        alert.setView(input);
+        alert.setTitle("Password Required");
+        input.setTransformationMethod(PasswordTransformationMethod.getInstance());
+        pass = input.getText().toString();
+        if (pass == null)
+            pass = "gamagama";
+        return pass;
+    }
+
+
     private void makeAnotherOne() {
         AlertDialog.Builder builder;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -298,7 +324,7 @@ public class AddRemoveUser extends AppCompatActivity implements ValueEventListen
         } else {
             builder = new AlertDialog.Builder(this);
         }
-        builder.setTitle("addAnotherUser")
+        builder.setTitle("הוספת משתמש נוסף")
                 .setMessage("האם ברצונך להכניס משתמש נוסף?")
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -324,12 +350,5 @@ public class AddRemoveUser extends AppCompatActivity implements ValueEventListen
         constractor.setChecked(false);
         focusView = firstName;
         focusView.requestFocus();
-    }
-
-    private boolean emailAndPasswordCheck(String email, String password) {
-        // check email exsist in database
-        //check email is correct
-        //check password length
-        return true;
     }
 }

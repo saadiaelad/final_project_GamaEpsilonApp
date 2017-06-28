@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:backgroundTint="@android:color/white"
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    tools:context="com.example.elad.gamaepsilonapp.SearchPage"
+    tools:targetApi="lollipop">
+
+    <ImageView
+        android:id="@+id/logoImage"
+        android:layout_width="1136dp"
+        android:layout_height="150dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/logo"
+        tools:ignore="ContentDescription,MissingConstraints"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <TextView
+        android:id="@+id/pakaSearch"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/logoImage"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="@string/paka_search"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <Spinner
+        android:id="@+id/searchOptionsSpinner"
+        android:layout_width="350dp"
+        android:layout_height="40dp"
+        android:background="@drawable/edittext_drawable"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/pakaSearch"
+        android:gravity="center" />
+
+    <EditText
+        android:id="@+id/pakaNumSearchText"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/edittext_drawable"
+        android:layout_below="@+id/searchOptionsSpinner"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/paka_number_search_text"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/startingDateSearchText"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/edittext_drawable"
+        android:layout_alignTop="@+id/pakaNumSearchText"
+        android:onClick="openDateDialog"
+        android:ems="10"
+        android:gravity="center"
+        android:focusable="false"
+        android:hint="@string/starting_date_search_text"
+        android:inputType="date"
+        tools:ignore="TextFields" />
+
+    <EditText
+        android:id="@+id/closingDateSearchText"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignTop="@+id/pakaNumSearchText"
+        android:layout_toEndOf="@+id/pakaNumSearchText"
+        android:background="@drawable/edittext_drawable"
+        android:onClick="openDateDialog"
+        android:ems="10"
+        android:inputType="date"
+        android:focusable="false"
+        android:gravity="center"
+        android:hint="@string/closing_date_search_text"
+        tools:ignore="TextFields" />
+
+    <Spinner
+        android:id="@+id/supervisorSearchSpinner"
+        android:layout_width="200dp"
+        android:background="@drawable/edittext_drawable"
+        android:layout_height="40dp"
+        android:layout_alignTop="@+id/closingDateSearchText"
+        android:layout_toEndOf="@+id/closingDateSearchText" />
+
+    <Spinner
+        android:id="@+id/workerSearchSpinner"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:background="@drawable/edittext_drawable"
+        android:layout_alignTop="@+id/pakaNumSearchText"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:id="@+id/monthSearchSpinner"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:background="@drawable/edittext_drawable"
+        android:layout_alignTop="@+id/closingDateSearchText"
+        android:layout_toEndOf="@+id/pakaNumSearchText" />
+
+    <Button
+        android:id="@+id/acceptSearchButton"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignTop="@+id/supervisorSearchSpinner"
+        android:layout_marginStart="93dp"
+        android:backgroundTint="@android:color/holo_red_light"
+        android:textStyle="bold"
+        android:layout_toEndOf="@+id/supervisorSearchSpinner"
+        android:text="@string/searchButton" />
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignEnd="@+id/logoImage"
+        android:layout_alignParentBottom="true"
+        android:backgroundTint="@android:color/holo_red_light"
+        android:textStyle="bold"
+        android:layout_marginBottom="36dp"
+        android:text="@string/back_button7" />
+
+</RelativeLayout>

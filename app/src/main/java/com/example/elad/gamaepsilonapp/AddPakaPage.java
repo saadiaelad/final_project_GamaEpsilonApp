@@ -72,7 +72,7 @@ public class AddPakaPage extends AppCompatActivity implements ValueEventListener
     private DatabaseReference dataRefPaka = database.getReference("pakaTable");
     private DatabaseReference dataRefUser = database.getReference("userTable");
     private DatabaseReference dataRefSupervisor = database.getReference("supervisorTable");
-    private DatabaseReference dataRefWork = database.getReference("work_table");
+    private DatabaseReference dataRefWork = database.getReference("worksTable");
     private User thisUser = new User();
 
 
@@ -138,7 +138,7 @@ public class AddPakaPage extends AppCompatActivity implements ValueEventListener
                 } else {
                     builder = new AlertDialog.Builder(view.getContext());
                 }
-                builder.setTitle("deleteWorker")
+                builder.setTitle("מחיקת משתמש")
                         .setMessage("המערכת מכינה את מחיקת העובד מהרשימה, האם ברצונך להמשיך?")
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
@@ -166,7 +166,7 @@ public class AddPakaPage extends AppCompatActivity implements ValueEventListener
                 } else {
                     builder = new AlertDialog.Builder(view.getContext());
                 }
-                builder.setTitle("deleteWork")
+                builder.setTitle("מחיקת עבודה")
                         .setMessage("המערכת מכינה את מחיקת העבודה מהרשימה, האם ברצונך להמשיך?")
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
@@ -232,19 +232,19 @@ public class AddPakaPage extends AppCompatActivity implements ValueEventListener
                             arraySupervisor.add(s);
                     }
                 }
-                case ("work_table"): {
+                case ("worksTable"): {
                     for (DataSnapshot d : dataSnapshot.getChildren()) {
-                        Works work = new Works((String) d.child("abbriviatedName").getValue(),
-                                (String) d.child("arabicName").getValue(),
-                                (String) d.child("cost").getValue(),
-                                (String) d.child("fullName").getValue(),
-                                (String) d.child("units").getValue(),
-                                (String) d.child("workNum").getValue());
-                        String s = (String) d.child("abbreviated name").getValue();
+                        Works work = new Works((String)d.child("abbriviatedName").getValue(),
+                                (String)d.child("arbicName").getValue(),
+                                (String)d.child("cost").getValue(),
+                                (String)d.child("fullName").getValue(),
+                                (String)d.child("units").getValue(),
+                                (String)d.child("workNum").getValue());
+                        String s = (String)d.child("abbriviatedName").getValue();
                         if (s != null) {
                             arrayWorks.add(s);
                         }
-                        if (work != null) {
+                        if (work.getFullName() != null) {
                             cW.add(work);
                         }
                     }

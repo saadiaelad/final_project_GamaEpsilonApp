@@ -131,7 +131,7 @@
         android:background="@drawable/edittext_drawable"
         android:ems="10"
         android:gravity="right"
-        android:hint="@string/periorty"
+        android:hint="@string/periortyText"
         android:inputType="number"
         android:textDirection="firstStrongRtl"
         tools:ignore="LabelFor,RtlHardcoded"

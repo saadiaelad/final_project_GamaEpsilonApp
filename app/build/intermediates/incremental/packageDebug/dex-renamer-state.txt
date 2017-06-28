@@ -1,4 +1,4 @@
-#Sun Jun 25 20:00:35 AZT 2017
+#Wed Jun 28 02:20:48 AZT 2017
 base.0=C\:\\Users\\elad\\AndroidStudioProjects\\GamaEpsilonApp\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_bff13824d74acb9790173ea189ba26babfb7e1ee
 renamed.1=classes2.dex
 renamed.0=classes.dex

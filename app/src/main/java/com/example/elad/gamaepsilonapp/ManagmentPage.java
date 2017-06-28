@@ -1,5 +1,6 @@
 package com.example.elad.gamaepsilonapp;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,12 +25,14 @@ public class ManagmentPage extends AppCompatActivity implements ValueEventListen
     private Button signOutButton;
     private Button backButton;
     private Button addRemoveWork;
-    private FirebaseAuth mAuth;
-    private FirebaseUser currentUser;
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();;
+    private FirebaseUser currentUser = mAuth.getCurrentUser();;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private DatabaseReference dataRef = database.getReference("user_table");
+    private DatabaseReference dataRef = database.getReference("userTable");
+    private String email = currentUser.getEmail();;
     private String username;
-    private Query q = dataRef.orderByChild("first name").equalTo("אלעד");
+    private ProgressDialog mProgressDialog;
+    private Query q = dataRef.orderByChild("userMail").equalTo(email);
 
 
     @Override
@@ -44,8 +47,11 @@ public class ManagmentPage extends AppCompatActivity implements ValueEventListen
         backButton = (Button)findViewById(R.id.backButton);
         addRemoveWork = (Button)findViewById(R.id.addRemoveWork);
 
-        mAuth = FirebaseAuth.getInstance();
-        currentUser = mAuth.getCurrentUser();
+        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setMessage("טוען...");
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.show();
 
         addRemoveUser.setOnClickListener(new OnClickListener());
         addRemoveSupervisor.setOnClickListener(new OnClickListener());
@@ -63,9 +69,13 @@ public class ManagmentPage extends AppCompatActivity implements ValueEventListen
 
     @Override
     public void onDataChange(DataSnapshot dataSnapshot) {
-        for (DataSnapshot postSnapshot: dataSnapshot.getChildren()){
-            username = postSnapshot.child("first name").getValue(String.class);
-            nameText.setText("שלום " + username);
+        for (DataSnapshot d: dataSnapshot.getChildren()){
+            if (d.child("firstName").getValue() != null) {
+                username = (String) d.child("firstName").getValue();
+                nameText.setText("שלום " + username);
+                while (nameText.getText().equals(""));
+                mProgressDialog.dismiss();
+            }
         }
     }
 
@@ -100,6 +110,7 @@ public class ManagmentPage extends AppCompatActivity implements ValueEventListen
         }
         else if (butt == 2) {
             Intent i = new Intent(this, AddRemoveUser.class);
+            finish();
             startActivity(i);
         }
         else if (butt == 3) {

@@ -34,7 +34,7 @@
     <string name="accept_butt5">אישור</string>
     <string name="paka_works">רשימת עבודות</string>
     <string name="paka_workers_list">רשימת עובדים</string>
-    <string name="periorty">דחיפות</string>
+    <string name="periortyText">דחיפות</string>
     <string name="paka_commit2">הערות</string>
     <string name="paka_address2">כתובת</string>
     <string name="paka_number">מספר פקע</string>
@@ -82,6 +82,45 @@
     <string name="add_remove_work">הוספה או הסרה של עבודה</string>
     <string name="back_button6">חזרה</string>
     <string name="details_text">פרטים</string>
+    <string name="back_button7">חזרה</string>
+    <string name="searchButton">חפש</string>
+    <string name="paka_number_search_text">מספר פקע</string>
+    <string name="starting_date_search_text">מתאריך</string>
+    <string name="closing_date_search_text">עד תאריך</string>
+
+    <string name="userTable">userTable</string>
+    <string name="pakaTable">pakaTable</string>
+    <string name="supervisorTable">supervisorTable</string>
+    <string name="worksTable">worksTable</string>
+    <string name="abbriviatedName">abbriviatedName</string>
+    <string name="arbicName">arbicName</string>
+    <string name="cost">cost</string>
+    <string name="fullName">fullName</string>
+    <string name="units">units</string>
+    <string name="workNum">workNum</string>
+    <string name="constractor">constractor</string>
+    <string name="firstName">firstName</string>
+    <string name="lastName">lastName</string>
+    <string name="permission">permission</string>
+    <string name="phoneNumber">phoneNumber</string>
+    <string name="userMail">userMail</string>
+    <string name="supervisorName">supervisorName</string>
+    <string name="workPlace">workPlace</string>
+    <string name="address">address</string>
+    <string name="className">className</string>
+    <string name="closingDate">closingDate</string>
+    <string name="openDate">openDate</string>
+    <string name="startingDate">startingDate</string>
+    <string name="commit">commit</string>
+    <string name="openOrClose">openOrClose</string>
+    <string name="supervisor">supervisor</string>
+    <string name="tat">tat</string>
+    <string name="price">price</string>
+    <string name="periorty">periorty</string>
+    <string name="pakaNum" value="pakaNum">pakaNum</string>
+
+
+
 
     <string-array name="permissionOptions">
         <item>בחר סוג עובד</item>
@@ -112,6 +151,23 @@
         <item>בחר סוג יחידות</item>
         <item>יחידות</item>
         <item>מטר</item>
+        <item>קוב</item>
+    </string-array>
+
+    <string-array name="month">
+        <item>בחר חודש</item>
+        <item>ינואר</item>
+        <item>פברואר</item>
+        <item>מרץ</item>
+        <item>אפריל</item>
+        <item>מאי</item>
+        <item>יוני</item>
+        <item>יולי</item>
+        <item>אוגוסט</item>
+        <item>ספטמבר</item>
+        <item>אוקטובר</item>
+        <item>נובמבר</item>
+        <item>דצמבר</item>
     </string-array>
 
 </resources>

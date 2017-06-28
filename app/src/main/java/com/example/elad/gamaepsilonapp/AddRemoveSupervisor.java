@@ -150,7 +150,7 @@ public class AddRemoveSupervisor extends AppCompatActivity implements ValueEvent
         } else {
             builder = new AlertDialog.Builder(this);
         }
-        builder.setTitle("addAnotherSupervisor")
+        builder.setTitle("הוספת מפקח נוסף")
                 .setMessage("האם ברצונך להכניס מפקח נוסף?")
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {

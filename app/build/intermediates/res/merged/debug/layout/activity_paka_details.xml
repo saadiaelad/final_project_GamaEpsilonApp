@@ -168,7 +168,7 @@
         android:textDirection="firstStrongRtl"
         tools:ignore="LabelFor,RtlHardcoded"
         android:layout_below="@+id/pakaDetailsText"
-        android:layout_toStartOf="@+id/backButton"
+        android:layout_toStartOf="@+id/backToOpenPakaPage"
         android:layout_marginEnd="24dp" />
 
     <TextView
@@ -187,8 +187,8 @@
         android:id="@+id/pakaCommitText"
         android:layout_width="245dp"
         android:layout_height="317dp"
-        android:layout_above="@+id/backButton"
-        android:layout_alignEnd="@+id/backButton"
+        android:layout_above="@+id/backToOpenPakaPage"
+        android:layout_alignEnd="@+id/backToOpenPakaPage"
         android:background="@drawable/edittext_drawable"
         android:ems="10"
         android:gravity="top|center"
@@ -203,7 +203,7 @@
         android:background="@drawable/edittext_drawable" />
 
     <Button
-        android:id="@+id/backButton"
+        android:id="@+id/backToOpenPakaPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@android:color/holo_red_light"

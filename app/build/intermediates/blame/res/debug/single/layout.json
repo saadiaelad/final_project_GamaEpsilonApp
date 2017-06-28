@@ -1,9 +1,5 @@
 [
     {
-        "merged": "C:\\Users\\elad\\AndroidStudioProjects\\GamaEpsilonApp\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_searchpage.xml",
-        "source": "C:\\Users\\elad\\AndroidStudioProjects\\GamaEpsilonApp\\app\\src\\main\\res\\layout\\activity_searchpage.xml"
-    },
-    {
         "merged": "C:\\Users\\elad\\AndroidStudioProjects\\GamaEpsilonApp\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_media_custom.xml",
         "source": "C:\\Users\\elad\\.android\\build-cache\\54fc8c57366989589118329a859490090270609d\\output\\res\\layout\\notification_template_media_custom.xml"
     },
@@ -14,6 +10,10 @@
     {
         "merged": "C:\\Users\\elad\\AndroidStudioProjects\\GamaEpsilonApp\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_action_tombstone.xml",
         "source": "C:\\Users\\elad\\.android\\build-cache\\54fc8c57366989589118329a859490090270609d\\output\\res\\layout\\notification_action_tombstone.xml"
+    },
+    {
+        "merged": "C:\\Users\\elad\\AndroidStudioProjects\\GamaEpsilonApp\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_search_page.xml",
+        "source": "C:\\Users\\elad\\AndroidStudioProjects\\GamaEpsilonApp\\app\\src\\main\\res\\layout\\activity_search_page.xml"
     },
     {
         "merged": "C:\\Users\\elad\\AndroidStudioProjects\\GamaEpsilonApp\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_select_dialog_material.xml",
@@ -322,6 +322,10 @@
     {
         "merged": "C:\\Users\\elad\\AndroidStudioProjects\\GamaEpsilonApp\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_up_container.xml",
         "source": "C:\\Users\\elad\\.android\\build-cache\\54fc8c57366989589118329a859490090270609d\\output\\res\\layout\\abc_action_bar_up_container.xml"
+    },
+    {
+        "merged": "C:\\Users\\elad\\AndroidStudioProjects\\GamaEpsilonApp\\app\\build\\intermediates\\res\\merged\\debug\\layout\\work_list_view_2.xml",
+        "source": "C:\\Users\\elad\\AndroidStudioProjects\\GamaEpsilonApp\\app\\src\\main\\res\\layout\\work_list_view_2.xml"
     },
     {
         "merged": "C:\\Users\\elad\\AndroidStudioProjects\\GamaEpsilonApp\\app\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_singlechoice_material.xml",

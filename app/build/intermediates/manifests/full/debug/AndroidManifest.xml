@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="19"
-        android:targetSdkVersion="25" />
+        android:targetSdkVersion="26" />
 
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
@@ -46,7 +46,7 @@
         <activity
             android:name="com.example.elad.gamaepsilonapp.AddPakaPage"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name="com.example.elad.gamaepsilonapp.Searchpage" />
+        <activity android:name="com.example.elad.gamaepsilonapp.SearchPage" />
         <activity android:name="com.example.elad.gamaepsilonapp.ManagmentPage" />
         <activity
             android:name="com.example.elad.gamaepsilonapp.AddRemoveUser"

@@ -26,7 +26,7 @@
         <activity
             android:name=".AddPakaPage"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".Searchpage" />
+        <activity android:name=".SearchPage" />
         <activity android:name=".ManagmentPage" />
         <activity
             android:name=".AddRemoveUser"
