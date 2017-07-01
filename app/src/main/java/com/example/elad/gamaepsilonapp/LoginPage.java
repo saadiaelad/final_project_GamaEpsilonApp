@@ -118,6 +118,7 @@ public class LoginPage extends AppCompatActivity implements ValueEventListener{
     private void startActivityButton(int butt) {
         if (butt == 1){
             Intent i = new Intent(this, OpenPakaPage.class);
+            i.putExtra("language", true);
             finish();
             startActivity(i);
         }

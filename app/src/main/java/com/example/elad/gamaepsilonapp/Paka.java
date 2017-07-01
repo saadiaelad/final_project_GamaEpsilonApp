@@ -19,7 +19,7 @@ public class Paka {
     String className;
     boolean tat;
     ArrayList<String> workers;
-    ArrayList<String> workPerfomed;
+    ArrayList<WorkPerfomed> workPerfomed;
     String price;
     String commit;
 
@@ -29,7 +29,7 @@ public class Paka {
 
     public Paka(String pakaNum, String address, boolean openOrClose, String  openDate, String startingDate,
                 String closingDate, ArrayList<String> teamLeader, String supervisor, String periorty,
-                String className, boolean tat, ArrayList<String> workers, ArrayList<String> workPerfomed,
+                String className, boolean tat, ArrayList<String> workers, ArrayList<WorkPerfomed> workPerfomed,
                 String price, String commit) {
 
         this.pakaNum = pakaNum;
@@ -145,11 +145,11 @@ public class Paka {
         this.workers = workers;
     }
 
-    public ArrayList<String> getWorkPerfomed() {
+    public ArrayList<WorkPerfomed> getWorkPerfomed() {
         return workPerfomed;
     }
 
-    public void setWorkPerfomed(ArrayList<String> workPerfomed) {
+    public void setWorkPerfomed(ArrayList<WorkPerfomed> workPerfomed) {
         this.workPerfomed = workPerfomed;
     }
 

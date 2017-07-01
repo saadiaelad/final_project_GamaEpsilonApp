@@ -118,8 +118,14 @@
     <string name="price">price</string>
     <string name="periorty">periorty</string>
     <string name="pakaNum" value="pakaNum">pakaNum</string>
-
-
+    <string name="address_text_view">כתובת</string>
+    <string name="paka_number_text_view">מספר פקע</string>
+    <string name="addressPakaTextView">כתובת</string>
+    <string name="paka_number_text_view2">מספר פקע</string>
+    <string name="save_button">שמירה</string>
+    <string name="team_leader_list_text_view">רשימת מנהלי צוותים</string>
+    <string name="works_list_text_view">רשימת עבודות</string>
+    <string name="workers_list_text_view">רשימת עובדים</string>
 
 
     <string-array name="permissionOptions">
@@ -152,6 +158,9 @@
         <item>יחידות</item>
         <item>מטר</item>
         <item>קוב</item>
+        <item>שעה</item>
+        <item>מ"א</item>
+        <item>מ"ר</item>
     </string-array>
 
     <string-array name="month">

@@ -125,18 +125,18 @@ public class AddRemoveUser extends AppCompatActivity implements ValueEventListen
                 permission.setText(user.getPermission());
                 phoneNumber.setText(user.getPhoneNumber());
                 email.setText(user.getEmail());
-                deleteImageButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                    }
-                });
-                editImageButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                    }
-                });
+//                deleteImageButton.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//
+//                    }
+//                });
+//                editImageButton.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//
+//                    }
+//                });
             }
         };
         workerListView.setAdapter(userAdapter);

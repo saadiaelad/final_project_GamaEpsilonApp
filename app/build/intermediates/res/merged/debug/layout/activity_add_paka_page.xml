@@ -227,48 +227,48 @@
 
     <TextView
         android:id="@+id/workListText"
-        android:layout_width="355dp"
+        android:layout_width="460dp"
         android:layout_height="43dp"
+        android:layout_below="@+id/works"
+        android:layout_toEndOf="@+id/workersListText"
         android:background="@drawable/edittext_drawable"
         android:gravity="center"
         android:text="@string/paka_works"
         android:textSize="16dp"
         android:textStyle="bold"
-        tools:ignore="SpUsage"
-        android:layout_below="@+id/works"
-        android:layout_toEndOf="@+id/workersListText" />
+        tools:ignore="SpUsage" />
 
     <Spinner
         android:id="@+id/works"
-        android:layout_width="355dp"
+        android:layout_width="460dp"
         android:layout_height="44dp"
-        android:background="@drawable/edittext_drawable"
         android:layout_above="@+id/workersListText"
-        android:layout_toEndOf="@+id/workers" />
+        android:layout_toEndOf="@+id/workers"
+        android:background="@drawable/edittext_drawable" />
 
     <Spinner
         android:id="@+id/workers"
-        android:layout_width="355dp"
+        android:layout_width="250dp"
         android:layout_height="44dp"
-        android:background="@drawable/edittext_drawable"
+        android:layout_alignStart="@+id/supervisor"
         android:layout_alignTop="@+id/works"
-        android:layout_alignStart="@+id/supervisor" />
+        android:background="@drawable/edittext_drawable" />
 
     <TextView
         android:id="@+id/workersListText"
-        android:layout_width="355dp"
+        android:layout_width="250dp"
         android:layout_height="43dp"
+        android:layout_above="@+id/workersListView"
+        android:layout_alignStart="@+id/workers"
         android:background="@drawable/edittext_drawable"
         android:gravity="center"
         android:text="@string/paka_workers_list"
         android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_above="@+id/workersListView"
-        android:layout_alignStart="@+id/workers" />
+        android:textStyle="bold" />
 
     <ListView
         android:id="@+id/worksListView"
-        android:layout_width="355dp"
+        android:layout_width="340dp"
         android:layout_height="280dp"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/workListText"
@@ -276,7 +276,7 @@
 
     <ListView
         android:id="@+id/workersListView"
-        android:layout_width="355dp"
+        android:layout_width="250dp"
         android:layout_height="280dp"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/workersListText"
@@ -294,5 +294,13 @@
         android:layout_alignParentBottom="true"
         android:text="@string/back_to_open_paka_page_button"
         tools:ignore="UnknownIdInLayout" />
+
+    <ListView
+        android:id="@+id/amountListView"
+        android:layout_width="120dp"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/workListText"
+        android:layout_toEndOf="@+id/worksListView"
+        android:background="@drawable/edittext_drawable"/>
 
 </RelativeLayout>

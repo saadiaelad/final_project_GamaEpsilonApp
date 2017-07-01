@@ -156,9 +156,9 @@
         android:id="@+id/makingDateText"
         android:layout_width="220dp"
         android:layout_height="40dp"
-        android:background="@drawable/edittext_drawable"
         android:ems="10"
         android:focusable="false"
+        android:background="@drawable/edittext_drawable"
         android:gravity="right"
         android:textStyle="bold"
         android:textDirection="firstStrongRtl"
@@ -185,14 +185,14 @@
         android:id="@+id/profitSumText"
         android:layout_width="180dp"
         android:layout_height="40dp"
-        android:layout_below="@+id/addressText"
-        android:layout_toEndOf="@+id/addressText"
         android:background="@drawable/edittext_drawable"
         android:ems="10"
         android:textStyle="bold"
         android:gravity="right"
         android:textDirection="firstStrongRtl"
-        tools:ignore="LabelFor,RtlHardcoded" />
+        tools:ignore="LabelFor,RtlHardcoded"
+        android:layout_above="@+id/pakaCommitText"
+        android:layout_toEndOf="@+id/tatOrNotText" />
 
     <TextView
         android:id="@+id/pakaCommitText"
@@ -204,7 +204,8 @@
         android:ems="10"
         android:textStyle="bold"
         android:gravity="top|center"
-        android:textDirection="firstStrongRtl" />
+        android:textDirection="firstStrongRtl"
+        android:layout_below="@+id/tatOrNotText" />
 
     <ListView
         android:id="@+id/workersListViewText"
@@ -232,5 +233,50 @@
         android:background="@drawable/edittext_drawable"
         android:layout_alignParentBottom="true"
         android:layout_toStartOf="@+id/pakaCommitText" />
+
+    <ImageButton
+        android:id="@+id/changeLanguage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:tint="@android:color/holo_red_light"
+        android:backgroundTint="@android:color/white"
+        app:srcCompat="@android:drawable/ic_menu_revert"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/teamLeaderTextView"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
+        android:background="@drawable/edittext_drawable"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:layout_alignBaseline="@+id/workersTextView"
+        android:layout_alignBottom="@+id/workersTextView"
+        android:layout_alignStart="@+id/pakaDetailsText"
+        android:text="@string/team_leader_list_text_view" />
+
+    <TextView
+        android:id="@+id/workersTextView"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:background="@drawable/edittext_drawable"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:layout_above="@+id/teamLeaderText"
+        android:layout_toEndOf="@+id/teamLeaderText"
+        android:text="@string/workers_list_text_view" />
+
+    <TextView
+        android:id="@+id/worksTextView"
+        android:layout_width="355dp"
+        android:layout_height="40dp"
+        android:background="@drawable/edittext_drawable"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:layout_above="@+id/worksListViewText"
+        android:layout_toEndOf="@+id/workersListViewText"
+        android:text="@string/works_list_text_view" />
 
 </RelativeLayout>

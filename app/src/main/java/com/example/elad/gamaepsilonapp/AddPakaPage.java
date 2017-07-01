@@ -3,9 +3,11 @@ package com.example.elad.gamaepsilonapp;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -34,13 +36,19 @@ import java.util.Comparator;
 public class AddPakaPage extends AppCompatActivity implements ValueEventListener, AdapterView.OnItemSelectedListener{
 
     String countChange = "";
+    private int a = 0;
+    double p = 0;
+    double profit = 0;
+    private boolean language = true;
     private ArrayList<String> arrayWorkers = new ArrayList<>();
     private ArrayList<String> arrayWorks = new ArrayList<>();
     private ArrayList<String> arraySupervisor = new ArrayList<>();
     private ArrayList<String> arrayTeamLeader = new ArrayList<>();
     private ArrayList<String> choosenWorkers = new ArrayList<>();
-    private ArrayList<String> choosenWorks = new ArrayList<>();
-    private ArrayList<String> teamLeaderCoosen = new ArrayList<>();
+    private ArrayList<String> choosenWorksName = new ArrayList<>();
+    private ArrayList<String> choosenWorksAmount = new ArrayList<>();
+    private ArrayList<String> teamLeaderChoosen = new ArrayList<>();
+    private ArrayList<WorkPerfomed> choosenWorks = new ArrayList<>();
     private ArrayList<Works> cW = new ArrayList<>();
     private EditText pakaNum;
     private EditText addressText;
@@ -63,6 +71,7 @@ public class AddPakaPage extends AppCompatActivity implements ValueEventListener
     private TextView workersListText;
     private ListView worksListView;
     private ListView workersListView;
+    private ListView amountListView;
     private DateFormat formatDate = DateFormat.getDateInstance();
     private Calendar startDatePicker = Calendar.getInstance();
     private View focusView;
@@ -74,6 +83,9 @@ public class AddPakaPage extends AppCompatActivity implements ValueEventListener
     private DatabaseReference dataRefSupervisor = database.getReference("supervisorTable");
     private DatabaseReference dataRefWork = database.getReference("worksTable");
     private User thisUser = new User();
+    ArrayAdapter<String> worksChoosenList;
+    ArrayAdapter<String> amountAdapter;
+    ArrayAdapter<String> workersChoosenList;
 
 
     @Override
@@ -102,6 +114,7 @@ public class AddPakaPage extends AppCompatActivity implements ValueEventListener
         workersListText = (TextView)findViewById(R.id.workersListText);
         worksListView = (ListView)findViewById(R.id.worksListView);
         workersListView = (ListView)findViewById(R.id.workersListView);
+        amountListView = (ListView)findViewById(R.id.amountListView);
         ArrayAdapter adapterClass = ArrayAdapter.createFromResource(this, R.array.className,
                 android.R.layout.simple_spinner_item);
         classNameText.setAdapter(adapterClass);
@@ -126,7 +139,7 @@ public class AddPakaPage extends AppCompatActivity implements ValueEventListener
                 android.R.layout.simple_spinner_item, arrayWorks);
         works.setAdapter(adapterWorks);
         works.setOnItemSelectedListener(this);
-        final ArrayAdapter<String> workersChoosenList = new ArrayAdapter<String>(this,
+        workersChoosenList = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, choosenWorkers);
         workersListView.setAdapter(workersChoosenList);
         workersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -154,8 +167,8 @@ public class AddPakaPage extends AppCompatActivity implements ValueEventListener
                         .show();
             }
         });
-        final ArrayAdapter<String> worksChoosenList = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, choosenWorks);
+        worksChoosenList = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, choosenWorksName);
         worksListView.setAdapter(worksChoosenList);
         worksListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -170,7 +183,18 @@ public class AddPakaPage extends AppCompatActivity implements ValueEventListener
                         .setMessage("המערכת מכינה את מחיקת העבודה מהרשימה, האם ברצונך להמשיך?")
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                worksChoosenList.remove((String)parent.getItemAtPosition(position));
+                                double p = 0;
+                                for (int i = 0 ; i < cW.size() ; i++){
+                                    if (worksChoosenList.getItem(position).equals(cW.get(i).getAbbriviatedName())) {
+                                        p = Double.parseDouble(cW.get(i).getCost());
+                                    }
+                                }
+                                int a = Integer.parseInt(choosenWorksAmount.get(position));
+                                p = p*a;
+                                profit = profit - p;
+                                profitSumText.setText(String.valueOf(profit));
+                                worksChoosenList.remove((String) parent.getItemAtPosition(position));
+                                amountAdapter.remove((String) amountListView.getItemAtPosition(position));
                             }
                         })
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -180,6 +204,16 @@ public class AddPakaPage extends AppCompatActivity implements ValueEventListener
                         })
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .show();
+            }
+        });
+        amountAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, choosenWorksAmount);
+        amountListView.setAdapter(amountAdapter);
+        amountListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
             }
         });
         acceptButton.setOnClickListener(new onClickListener());
@@ -200,62 +234,57 @@ public class AddPakaPage extends AppCompatActivity implements ValueEventListener
 
     @Override
     public void onDataChange(DataSnapshot dataSnapshot) {
-            switch (dataSnapshot.getKey()){
-                case ("pakaTable"):{
-                    countChange ="" + dataSnapshot.getChildrenCount();
-                    for (DataSnapshot d:dataSnapshot.getChildren()){
-                        if (d.child("teamLeader").getValue() != null)
-                            for (DataSnapshot ds:d.child("teamLeader").getChildren())
-                                if (ds.getValue() != null)
-                                    if (d.child("pakaNum").getValue().toString().equals(pakaNum.getText().toString()))
-                                        teamLeaderCoosen.add(ds.getValue().toString());
-                    }
-                }
-                case ("userTable"):{
-                    for (DataSnapshot d:dataSnapshot.getChildren()) {
-                        String s = (String) d.child("firstName").getValue();
+        if (dataSnapshot.getKey().equals("pakaTable")){
+            countChange ="" + dataSnapshot.getChildrenCount();
+            for (DataSnapshot d:dataSnapshot.getChildren()){
+                if (d.child("teamLeader").getValue() != null)
+                    for (DataSnapshot ds:d.child("teamLeader").getChildren())
+                        if (ds.getValue() != null)
+                            if (d.child("pakaNum").getValue().toString().equals(pakaNum.getText().toString()))
+                                teamLeaderChoosen.add(ds.getValue().toString());
+            }
+        }
+        else if (dataSnapshot.getKey().equals("userTable")){
+            for (DataSnapshot d:dataSnapshot.getChildren()) {
+                String s = (String) d.child("firstName").getValue();
+                if (s != null)
+                    arrayWorkers.add(s);
+                if (d.child("permission").getValue() != null) {
+                    if (((String) d.child("permission").getValue()).equals("מנהל ראשי") ||
+                            ((String) d.child("permission").getValue()).equals("מנהל צוות")) {
                         if (s != null)
-                            arrayWorkers.add(s);
-                        if (d.child("permission").getValue() != null) {
-                            if (((String) d.child("permission").getValue()).equals("מנהל ראשי") ||
-                                    ((String) d.child("permission").getValue()).equals("מנהל צוות")) {
-                                if (s != null)
-                                    arrayTeamLeader.add(s);
-                            }
-                        }
+                            arrayTeamLeader.add(s);
                     }
-                }
-                case ("supervisorTable"):{
-                    for (DataSnapshot d:dataSnapshot.getChildren()){
-                        String s = (String)d.child("supervisorName").getValue();
-                        if (s != null)
-                            arraySupervisor.add(s);
-                    }
-                }
-                case ("worksTable"): {
-                    for (DataSnapshot d : dataSnapshot.getChildren()) {
-                        Works work = new Works((String)d.child("abbriviatedName").getValue(),
-                                (String)d.child("arbicName").getValue(),
-                                (String)d.child("cost").getValue(),
-                                (String)d.child("fullName").getValue(),
-                                (String)d.child("units").getValue(),
-                                (String)d.child("workNum").getValue());
-                        String s = (String)d.child("abbriviatedName").getValue();
-                        if (s != null) {
-                            arrayWorks.add(s);
-                        }
-                        if (work.getFullName() != null) {
-                            cW.add(work);
-                        }
-                    }
-                    Collections.sort(arrayWorks, new Comparator<String>() {
-                        @Override
-                        public int compare(String s1, String s2) {
-                            return s1.compareToIgnoreCase(s2);
-                        }
-                    });
                 }
             }
+        }
+        else if (dataSnapshot.getKey().equals("supervisorTable")){
+            for (DataSnapshot d:dataSnapshot.getChildren()){
+                String s = (String)d.child("supervisorName").getValue();
+                if (s != null)
+                    arraySupervisor.add(s);
+            }
+        }
+        else if (dataSnapshot.getKey().equals("worksTable")){
+            for (DataSnapshot d : dataSnapshot.getChildren()) {
+                Works work = new Works((String)d.child("abbriviatedName").getValue(),
+                        (String)d.child("arbicName").getValue(),
+                        (String)d.child("cost").getValue(),
+                        (String)d.child("fullName").getValue(),
+                        (String)d.child("units").getValue(),
+                        (String)d.child("workNum").getValue());
+                String s = (String)d.child("abbriviatedName").getValue();
+                if (s != null) {
+                    arrayWorks.add(s);
+                    cW.add(work);
+                }
+            }
+            Collections.sort(arrayWorks, new Comparator<String>() {
+                @Override
+                public int compare(String s1, String s2) {
+                    return s1.compareToIgnoreCase(s2);}
+                });
+        }
     }
 
     @Override
@@ -278,19 +307,72 @@ public class AddPakaPage extends AppCompatActivity implements ValueEventListener
                 workers.setSelection(0);
             }
             else if (parent.getSelectedItem() == works.getSelectedItem()) {
-                if (parent.getSelectedItem() == works.getSelectedItem()) {
-                    String s = (String) works.getSelectedItem();
-                    if (s != null)
-                        for (int i = 0 ; i<choosenWorks.size() ; i++)
-                            if (choosenWorks.get(i).equals(s)) {
-                                works.setSelection(0);
-                                return;
-                            }
-                        choosenWorks.add(s);
-                    works.setSelection(0);
+                String workName = (String) works.getSelectedItem();
+                if (workName != null) {
+                    for (int i = 0; i < choosenWorks.size(); i++) {
+                        if (choosenWorks.get(i).equals(workName)) {
+                            works.setSelection(0);
+                            return;
+                        }
+                    }
+                    for (int j = 0; j < cW.size(); j++) {
+                        if (cW.get(j).getAbbriviatedName().equals(workName)) {
+                            addAmount(cW.get(j).getCost(), workName, cW.get(j).getArbicName());
+                        }
+                    }
                 }
+                works.setSelection(0);
+            }
+            else if (parent.getSelectedItem() == teamLeaderSpinner.getSelectedItem()){
+                if (parent.getSelectedItemPosition() == 0)
+                    return;
+                for (int i = 0 ; i < choosenWorkers.size() ; i++) {
+                    if (teamLeaderSpinner.getSelectedItem().equals(choosenWorkers.get(i)))
+                        return;
+                }
+                choosenWorkers.add((String) teamLeaderSpinner.getSelectedItem());
+                workersChoosenList.notifyDataSetChanged();
             }
         }
+    }
+
+    private void addAmount(final String cost, final String name, final String  arabic) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("כמות");
+        final EditText input = new EditText(this);
+        input.setInputType(InputType.TYPE_CLASS_NUMBER);
+        builder.setView(input);
+        builder.setPositiveButton("אישור", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                try {
+                    a = Integer.parseInt(input.getText().toString());
+                    try {
+                        p = Double.parseDouble(cost);
+                    } catch(NumberFormatException nfe) {
+                    }
+                    p = p*a;
+                    profit = profit + p;
+                    String amount = String .valueOf(a);
+                    String price = String.valueOf(p);
+                    WorkPerfomed wP = new WorkPerfomed(name, arabic, price, amount);
+                    choosenWorks.add(wP);
+                    choosenWorksName.add(name);
+                    choosenWorksAmount.add(amount);
+                    worksChoosenList.notifyDataSetChanged();
+                    amountAdapter.notifyDataSetChanged();
+                    profitSumText.setText(String.valueOf(profit));
+                } catch(NumberFormatException nfe) {
+                }
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.show();
     }
 
     @Override
@@ -313,7 +395,10 @@ public class AddPakaPage extends AppCompatActivity implements ValueEventListener
     }
 
     private void startActivityButton() {
+        Intent i = new Intent(this, OpenPakaPage.class);
+        i.putExtra("language", language);
         finish();
+        startActivity(i);
     }
 
     public void openDateDialog(View v){
@@ -386,16 +471,17 @@ public class AddPakaPage extends AppCompatActivity implements ValueEventListener
         String className = classNameText.getSelectedItem().toString();
         boolean tat = tatOrNotCheckBox.isChecked();
         ArrayList<String> workers =  new ArrayList<>();
-        ArrayList<String> workPerfomed = new ArrayList<>();
+        ArrayList<WorkPerfomed> workPerfomed = new ArrayList<>();
         String price = profitSumText.getText().toString();
         String commit = pakaCommitText.getText().toString();
-        for (int i=0 ; i<teamLeaderCoosen.size() ; i++)
-            teamLeader.add(teamLeaderCoosen.get(i));
+        for (int i=0 ; i<teamLeaderChoosen.size() ; i++)
+            teamLeader.add(teamLeaderChoosen.get(i));
         teamLeader.add((String)teamLeaderSpinner.getSelectedItem());
         for (int i=0 ; i < choosenWorkers.size() ; i++)
             workers.add(choosenWorkers.get(i));
-        for (int i=0 ; i < choosenWorks.size() ; i++)
+        for (int i=0 ; i < choosenWorks.size() ; i++) {
             workPerfomed.add(choosenWorks.get(i));
+        }
         dataRefPaka.child(countChange).child("pakaNum").setValue(pakaNumber);
         dataRefPaka.child(countChange).child("address").setValue(address);
         dataRefPaka.child(countChange).child("openOrClose").setValue(openOrClose);
@@ -410,10 +496,18 @@ public class AddPakaPage extends AppCompatActivity implements ValueEventListener
         dataRefPaka.child(countChange).child("tat").setValue(tat);
         for (int i=0 ; i < workers.size() ; i++)
             dataRefPaka.child(countChange).child("workers").child("" + i).setValue(workers.get(i));
-        for (int i=0 ; i < workPerfomed.size() ; i++)
-            dataRefPaka.child(countChange).child("workPerfomed").child("" + i).setValue(workPerfomed.get(i));
+        for (int i=0 ; i < workPerfomed.size() ; i++) {
+            dataRefPaka.child(countChange).child("workPerfomed").child
+                    ("" + i).child("workName").setValue(workPerfomed.get(i).getWorkName());
+            dataRefPaka.child(countChange).child("workPerfomed").child
+                    ("" + i).child("workNameArabic").setValue(workPerfomed.get(i).getWorkNameArabic());
+            dataRefPaka.child(countChange).child("workPerfomed").child
+                    ("" + i).child("price").setValue(workPerfomed.get(i).getPrice());
+            dataRefPaka.child(countChange).child("workPerfomed").child
+                    ("" + i).child("amount").setValue(workPerfomed.get(i).getAmount());
+        }
         dataRefPaka.child(countChange).child("price").setValue(price);
         dataRefPaka.child(countChange).child("commit").setValue(commit);
-        teamLeaderCoosen.clear();
+        teamLeaderChoosen.clear();
     }
 }

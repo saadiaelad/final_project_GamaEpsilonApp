@@ -5,22 +5,26 @@
     android:id="@+id/activity_open_paka_page"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:backgroundTint="@android:color/white"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.elad.gamaepsilonapp.OpenPakaPage"
-    android:background="@android:color/white">
+    tools:ignore="UnusedAttribute">
 
     <ListView
         android:id="@+id/pakaNumberListView"
         android:layout_width="200dp"
         android:layout_height="230dp"
+        android:gravity="center"
+        android:focusable="false"
+        android:descendantFocusability="blocksDescendants"
+        android:background="@drawable/edittext_drawable"
         android:layout_above="@+id/signOutButton"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/pakaNumberTextView"
-        android:gravity="center"
-        android:background="@drawable/edittext_drawable"/>
+        android:layout_below="@+id/pakaNumberTextView" />
 
     <ImageView
         android:layout_width="match_parent"
@@ -45,14 +49,16 @@
 
     <TextView
         android:id="@+id/nameText"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginRight="430dp"
-        android:layout_marginTop="220dp"
         android:textColor="@android:color/black"
         android:textSize="30sp"
         android:textStyle="bold"
-        tools:ignore="RtlHardcoded" />
+        tools:ignore="RelativeOverlap,RtlHardcoded"
+        android:layout_marginStart="225dp"
+        android:layout_above="@+id/addressTextView"
+        android:layout_toEndOf="@+id/pakaNumberTextView" />
 
     <Button
         android:text="@string/sign_out_butt2"
@@ -81,11 +87,11 @@
         android:layout_width="200dp"
         android:layout_height="40dp"
         android:background="@drawable/edittext_drawable"
-        android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/nameText"
         android:gravity="center"
-        android:text="מספר פקע"
-        android:textStyle="bold"/>
+        android:text="@string/paka_number_text_view2"
+        android:textStyle="bold"
+        android:layout_below="@+id/addPakaButton"
+        android:layout_alignParentStart="true" />
 
     <ListView
         android:id="@+id/addressListView"
@@ -95,6 +101,8 @@
         android:layout_toEndOf="@+id/pakaNumberListView"
         android:layout_alignBottom="@+id/pakaNumberListView"
         android:gravity="center"
+        android:focusable="false"
+        android:descendantFocusability="blocksDescendants"
         android:background="@drawable/edittext_drawable"/>
 
     <TextView
@@ -106,5 +114,16 @@
         android:layout_toEndOf="@+id/pakaNumberListView"
         android:gravity="center"
         android:textStyle="bold"
-        android:text="כתובת" />
+        android:text="@string/addressPakaTextView" />
+
+    <ImageButton
+        android:id="@+id/changeLanguage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:tint="@android:color/holo_red_light"
+        android:backgroundTint="@android:color/white"
+        app:srcCompat="@android:drawable/ic_menu_revert"
+        tools:ignore="ContentDescription" />
 </RelativeLayout>

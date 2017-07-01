@@ -133,4 +133,45 @@
         android:layout_marginBottom="36dp"
         android:text="@string/back_button7" />
 
+    <ListView
+        android:id="@+id/pakaNumberListView"
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/pakaNumberText"
+        android:gravity="center"
+        android:background="@drawable/edittext_drawable"/>
+
+    <TextView
+        android:id="@+id/pakaNumberText"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/edittext_drawable"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_below="@+id/pakaNumSearchText"
+        android:layout_marginTop="20dp"
+        android:text="@string/paka_number_text_view" />
+
+    <ListView
+        android:id="@+id/addressSearchListView"
+        android:layout_width="600dp"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/pakaNumberText"
+        android:layout_toEndOf="@+id/pakaNumberListView"
+        android:gravity="center"
+        android:background="@drawable/edittext_drawable"/>
+
+    <TextView
+        android:id="@+id/addressTextView"
+        android:layout_width="600dp"
+        android:layout_height="40dp"
+        android:background="@drawable/edittext_drawable"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_alignTop="@+id/pakaNumberText"
+        android:layout_toEndOf="@+id/pakaNumberText"
+        android:text="@string/address_text_view" />
+
 </RelativeLayout>

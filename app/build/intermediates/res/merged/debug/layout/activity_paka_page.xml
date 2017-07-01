@@ -5,11 +5,14 @@
     android:id="@+id/activity_paka_page"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:backgroundTint="@android:color/white"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.elad.gamaepsilonapp.PakaPage">
+    tools:context="com.example.elad.gamaepsilonapp.PakaPage"
+    tools:ignore="UnusedAttribute">
 
     <ImageView
         android:layout_width="match_parent"
@@ -24,31 +27,34 @@
         android:text="@string/sign_out_butt3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
         android:id="@+id/signOutButton"
         android:backgroundTint="@android:color/holo_red_light"
-        tools:ignore="UnusedAttribute"
-        android:textStyle="bold" />
+        tools:ignore="RelativeOverlap,UnusedAttribute"
+        android:textStyle="bold"
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/nameText" />
 
     <ListView
-        android:layout_width="match_parent"
-        android:layout_height="220dp"
         android:id="@+id/worksList"
+        android:layout_width="500dp"
+        android:layout_height="325dp"
         android:layout_above="@+id/signOutButton"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/workOptionSpinner" />
+        android:background="@drawable/edittext_drawable"/>
 
     <TextView
         android:id="@+id/nameText"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginRight="430dp"
-        android:layout_marginTop="220dp"
         android:textColor="@android:color/black"
         android:textSize="30sp"
         android:textStyle="bold"
-        tools:ignore="RtlHardcoded" />
+        android:gravity="center"
+        tools:ignore="RelativeOverlap,RtlHardcoded"
+        android:layout_below="@+id/logo"
+        android:layout_alignEnd="@+id/worksList"
+        android:layout_marginEnd="30dp" />
 
     <Button
         android:text="@string/back_butt2"
@@ -57,9 +63,21 @@
         android:id="@+id/backButton"
         android:backgroundTint="@android:color/holo_red_light"
         tools:ignore="UnusedAttribute"
+        android:textStyle="bold"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:textStyle="bold" />
+        android:layout_alignStart="@+id/backToSearchPage" />
+
+    <Button
+        android:text="@string/back_butt2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/backToSearchPage"
+        android:backgroundTint="@android:color/holo_red_light"
+        tools:ignore="UnusedAttribute"
+        android:textStyle="bold"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/amountListView"
+        android:layout_marginStart="91dp" />
 
     <Button
         android:text="@string/close_paka_butt"
@@ -74,12 +92,12 @@
 
     <Spinner
         android:id="@+id/workOptionSpinner"
-        android:layout_width="match_parent"
+        android:layout_width="650dp"
         android:layout_height="40dp"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/detailsButton"
-        android:layout_marginTop="12dp"
-        android:spinnerMode="dialog" />
+        android:spinnerMode="dialog"
+        android:layout_above="@+id/worksList"
+        android:layout_alignEnd="@+id/amountListView"
+        android:background="@drawable/edittext_drawable"/>
 
     <Button
         android:text="@string/details_butt"
@@ -89,6 +107,37 @@
         android:backgroundTint="@android:color/holo_red_light"
         android:textStyle="bold"
         tools:ignore="UnusedAttribute"
-        android:layout_below="@+id/logo"
-        android:layout_alignParentStart="true" />
+        android:layout_alignBottom="@+id/nameText"
+        android:layout_alignStart="@+id/workOptionSpinner" />
+
+    <ImageButton
+        android:id="@+id/changeLanguage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:tint="@android:color/holo_red_light"
+        android:backgroundTint="@android:color/white"
+        app:srcCompat="@android:drawable/ic_menu_revert"
+        tools:ignore="ContentDescription" />
+
+    <ListView
+        android:id="@+id/amountListView"
+        android:layout_width="150dp"
+        android:layout_height="325dp"
+        android:layout_above="@+id/backButton"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/edittext_drawable"/>
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/workOptionSpinner"
+        android:layout_marginStart="11dp"
+        android:backgroundTint="@android:color/holo_red_light"
+        android:textStyle="bold"
+        android:text="@string/save_button" />
+
 </RelativeLayout>
